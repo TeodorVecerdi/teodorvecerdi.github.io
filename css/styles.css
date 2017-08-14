@@ -43,3 +43,9 @@
     background-color: #c75c5c;
     background-size: cover;
 }
+.dropdown:hover {
+    cursor: pointer;
+}
+.dropdown:not(:hover) {
+    cursor: default;
+}
