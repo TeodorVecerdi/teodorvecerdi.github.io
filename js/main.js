@@ -6,7 +6,7 @@ function setLanguage(langCode) {
         lang=data;
         console.log(data);
         $.each(lang, function (key, value) {
-            $("#"+key).text(value);
+            $("#"+key).html(value);
             console.log(key + ": " + value);
         });
     });
