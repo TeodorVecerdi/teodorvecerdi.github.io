@@ -5,8 +5,8 @@ function setLanguage(langCode) {
     $.getJSON('../lang/'+langCode+'.json', function(data) {
         lang=data;
         console.log(data);
-        console.log(lang);
     });
+    console.log(lang);
     $.each(lang, function (key, value) {
         $("#"+key).text(value);
         console.log(key + ": " + value);
@@ -25,13 +25,4 @@ $(function () {
         console.log(lang);
         setLanguage(lang);
     });
-
-
 });
-
-function setAddress(b) {
-    var a = history.state;
-    history.pushState(a, "", b);
-}
-
-
