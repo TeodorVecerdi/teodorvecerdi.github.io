@@ -5,12 +5,13 @@ function setLanguage(langCode) {
     $.getJSON('../lang/'+langCode+'.json', function(data) {
         lang=data;
         console.log(data);
+        $.each(lang, function (key, value) {
+            $("#"+key).text(value);
+            console.log(key + ": " + value);
+        });
     });
     console.log(lang);
-    $.each(lang, function (key, value) {
-        $("#"+key).text(value);
-        console.log(key + ": " + value);
-    });
+
 }
 
 $(function () {
