@@ -1,0 +1,19 @@
+{
+  "langNavbarProjects": "Projekte",
+  "langNavbarFeatures": "Eigenschaften",
+  "langNavbarContact": "Kontakt",
+  "langNavbarLanguage": "Sprache",
+  "langHeaderTitle": "Dies ist eine Website über Projekte, an denen ich arbeite. Ob es sich um ein Spiel, eine Desktop-Anwendung oder eine Website handelt, nennst du es und es wird hier sein!",
+  "langHeaderNext": "Mehr sehen!",
+
+  "langProjectMovielistTitle": "Movielist",
+  "langProjectMovielistDesc": "Movielist ist eine Desktop-Anwendung, die es dem Benutzer ermöglicht, Listen von Filmen und Serien mit der iMDB-ID oder dem Titel zu erstellen. Es ist sinnvoll zu verfolgen, welche Filme du gesehen hast, du willst sie ansehen oder sogar in Kategorien trennen. Wenn du keine Ahnung hast, welcher Film dort hinzuzufügen ist, gibt es sogar eine Liste, von der du auswählen kannst.",
+  "langProjectsMovielistLink": "Zieh dir das mal rein!",
+
+  "langProjectPegasusTitle": "Project Pegasus",
+  "langProjectPegasusDesc": "Project Pegasus ist der Codename für ein 2D Top-Down-Spiel, an dem ich derzeit arbeite. Es ist ein Überlebensspiel, in dem du Ressourcen, Handwerksgegenstände und Waffen sammeln und alles bauen kannst, was du willst. Aber wie sich die Nacht nähert und mit ihr Monster erscheinen, um dich zu holen, musst du deine Basis verteidigen und am Leben bleiben.",
+  "langProjectPegasusLink": "Demnächst!",
+
+  "langContact": "Wir würden <i class='fa fa-heart'></i> von dir hören!",
+  "langFooterDisclaimer": "&copy; 2017 TeodorVecerdi. Alle Rechte Vorbehalten."
+}
