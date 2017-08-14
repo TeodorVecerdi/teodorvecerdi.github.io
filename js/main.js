@@ -1,3 +1,18 @@
+function setLanguage(langCode) {
+    localStorage.setItem("lang", langCode);
+    console.log(langCode);
+    var lang={};
+    $.getJSON('../lang/'+langCode+'.json', function(data) {
+        lang=data;
+        console.log(data);
+        console.log(lang);
+    });
+    $.each(lang, function (key, value) {
+        $("#"+key).text(value);
+        console.log(key + ": " + value);
+    });
+}
+
 $(function () {
 
     var e = localStorage.getItem("lang");
@@ -9,7 +24,9 @@ $(function () {
         var lang = $(this).prop("lang");
         console.log(lang);
         setLanguage(lang);
-    })
+    });
+
+
 });
 
 function setAddress(b) {
@@ -17,17 +34,4 @@ function setAddress(b) {
     history.pushState(a, "", b);
 }
 
-function setLanguage(langCode) {
-    localStorage.setItem("lang", langCode);
-    console.log(langCode);
-    var lang={};
-    $.getJSON('../lang/'+langCode+'.json', function(data) {
-        lang=data;
-        console.log(data);
-        console.log(lang);
-    });
-    $.each(lang, function (key, value) {
-       $("#"+key).text(value);
-       console.log(key + ": " + value);
-    });
-}
+
