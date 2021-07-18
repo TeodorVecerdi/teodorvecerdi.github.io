@@ -15,7 +15,7 @@ const system_css = `<span class="fa-stack fa-2x" title="System Theme">
 
 function applyTheme() {
     let preferredTheme = localStorage.getItem('theme');
-    if(!preferredTheme) {
+    if (!preferredTheme) {
         preferredTheme = 'system';
         localStorage.setItem('theme', preferredTheme);
     }
@@ -41,7 +41,7 @@ function applyTheme() {
 
 function toggleTheme() {
     let preferredTheme = localStorage.getItem('theme');
-    if(preferredTheme === 'dark') {
+    if (preferredTheme === 'dark') {
         $('body').removeClass('dark')
         preferredTheme = 'light';
     } else if (preferredTheme === 'light') {
