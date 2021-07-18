@@ -1,0 +1,624 @@
+/* ==================================================
+   CSS Imports
+================================================== */
+
+@import url("reset.css");
+@import url("uikit.scrollspy.css");
+
+
+/* ==================================================
+   Google Fonts
+================================================== */
+
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600,600italic,700,700italic,900,900italic");
+
+/* ==================================================
+   THEME
+================================================== */
+
+.theme {
+    // auto dark
+    --primary: #0078d4;
+    --primary-light: #2b88d8;
+    --primary-dark: #005a9e;
+    --light: #222222;
+    --gray: #999999;
+    --dark-gray: #eeeeee;
+    --dark: #ffffff;
+    --countdown-text: #eeeeee;
+
+    #greeting:after {
+        content: "👋🏻";
+    }
+
+    transition: color 0.5s ease, background-color 0.5s ease, border-bottom-color 0.5s ease, border-left-color 0.5s ease, border-top-color 0.5s ease, border-right-color 0.5s ease;
+    -moz-transition: color 0.5s ease, background-color 0.5s ease, border-bottom-color 0.5s ease, border-left-color 0.5s ease, border-top-color 0.5s ease, border-right-color 0.5s ease;
+    -o-transition: color 0.5s ease, background-color 0.5s ease, border-bottom-color 0.5s ease, border-left-color 0.5s ease, border-top-color 0.5s ease, border-right-color 0.5s ease;
+    -webkit-transition: color 0.5s ease, background-color 0.5s ease, border-bottom-color 0.5s ease, border-left-color 0.5s ease, border-top-color 0.5s ease, border-right-color 0.5s ease;
+
+    // forced dark
+    &.dark {
+        --primary: #0078d4;
+        --primary-light: #2b88d8;
+        --primary-dark: #005a9e;
+        --light: #222222;
+        --gray: #999999;
+        --dark-gray: #eeeeee;
+        --dark: #ffffff;
+        --countdown-text: #eeeeee;
+    }
+
+    // forced light
+    &.light {
+        --primary: #0078d4;
+        --primary-light: #2b88d8;
+        --primary-dark: #005a9e;
+        --light: #ffffff;
+        --gray: #eeeeee;
+        --dark-gray: #999999;
+        --dark: #222222;
+
+        --countdown-text: #ffffff;
+    }
+}
+
+#greeting {
+    font-size: 2.25em;
+    padding-bottom: 0.5em;
+}
+
+@media (prefers-color-scheme: light) {
+    .theme {
+        --primary: #0078d4;
+        --primary-light: #2b88d8;
+        --primary-dark: #005a9e;
+        /*--primary: #7719aa;*/
+        /*--primary-light: #d1abe6;*/
+        /*--primary-dark: #5b1382;*/
+        --light: #ffffff;
+        --gray: #eeeeee;
+        --dark-gray: #999999;
+        --dark: #222222;
+
+        --countdown-text: #ffffff;
+    }
+}
+
+.text-light {
+    color: var(--light);
+}
+
+.text-gray {
+    color: var(--gray);
+}
+
+.text-dark-gray {
+    color: var(--dark-gray);
+}
+
+.text-dark {
+    color: var(--dark);
+}
+
+.text-primary {
+    color: var(--primary);
+}
+
+.text-primary-light {
+    color: var(--primary-light);
+}
+
+.text-primary-dark {
+    color: var(--primary-dark);
+}
+
+
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.bg-primary-light {
+    background-color: var(--primary-light);
+}
+
+.bg-primary-dark {
+    background-color: var(--primary-dark);
+}
+
+.bg-gray {
+    background-color: var(--gray);
+}
+
+
+/* ==================================================
+   Global Styles
+================================================== */
+
+#theme-toggle {
+    position: absolute;
+    right: 0;
+    top: 0.4rem;
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.no-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                     supported by Chrome, Edge, Opera and Firefox */
+}
+
+html {
+    height: 100%;
+    overflow: auto;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 300;
+    color: var(--dark-gray);
+    background: var(--light);
+
+    text-rendering: optimizeLegibility;
+    vertical-align: baseline;
+}
+
+::selection {
+    background: var(--primary);
+    color: var(--light);
+}
+
+::-moz-selection {
+    background: var(--primary);
+    color: var(--light);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--dark);
+}
+
+/* ==================================================
+   Default Typography
+================================================== */
+
+strong {
+    font-weight: 600;
+}
+
+em {
+    font-style: italic;
+}
+
+h1,
+h2,
+h3 {
+    font-size: 3em;
+    line-height: 60px;
+    margin: 0 0 20px 0;
+    letter-spacing: -1px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 38px;
+    line-height: 38px;
+}
+
+h3 {
+    font-size: 32px;
+    line-height: 32px;
+}
+
+/* ==================================================
+   Separator Arrows
+================================================== */
+
+.arrow-separator {
+    position: relative;
+}
+
+.arrow-separator:after {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: 12px;
+    left: 50%;
+    margin-left: -12px;
+    z-index: 11;
+}
+
+.arrow-white:after {
+    border-color: var(--light) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0); /** Using RGB to remove dark line in Firefox **/
+}
+
+.arrow-theme:after {
+    border-color: var(--primary) rgba(22, 160, 133, 0) rgba(22, 160, 133, 0) rgba(22, 160, 133, 0);
+}
+
+.arrow-themelight:after {
+    border-color: var(--primary-light) rgba(26, 188, 156, 0) rgba(26, 188, 156, 0) rgba(26, 188, 156, 0);
+}
+
+.arrow-grey:after {
+    border-color: var(--gray) rgba(238, 238, 238, 0) rgba(238, 238, 238, 0) rgba(238, 238, 238, 0);
+}
+
+/* ==================================================
+   General Layout Styles
+================================================== */
+
+.full-padding {
+    width: 100%;
+    padding: 60px 30px;
+    min-width: 280px;
+}
+
+.full-padding .bodycontainer {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.full-width {
+    width: 100%;
+    padding-top: 100px;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    min-width: 280px;
+}
+
+.full-width .bodycontainer {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+#topcontainer h1 {
+    padding: 6px 0 10px 0;
+    margin-bottom: 0;
+    letter-spacing: -1.5px;
+    font-weight: 400;
+}
+
+#topcontainer h1 span {
+    font-size: 70px;
+    line-height: 70px;
+    letter-spacing: -1.4px;
+    font-weight: 300;
+}
+
+#topcontainer p {
+    margin-bottom: 0;
+}
+
+#topcontainer p span {
+    font-size: 90px;
+    line-height: 90px;
+}
+
+#countdown {
+    color: var(--light);
+}
+
+#countdown #countdowncont {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+#countdown #countdowncont ul#countscript li {
+    float: left;
+    width: 25%;
+    padding: 30px 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+#countdown #countdowncont ul#countscript li span {
+    font-size: 80px;
+    line-height: 80px;
+    font-weight: 300;
+    color: var(--countdown-text);
+}
+
+#countdown #countdowncont ul#countscript li p {
+    color: var(--countdown-text);
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 18px;
+    margin: 0;
+}
+
+#maincont {
+    color: var(--light);
+}
+
+#maincont a {
+    color: var(--light);
+    opacity: 0.6;
+}
+
+#maincont a:hover {
+    opacity: 1;
+}
+
+#maincont #signupform {
+    margin: 0 auto 20px auto;
+    width: 80%;
+}
+
+.sb-search {
+    position: relative;
+    width: 100%;
+    min-width: 50px;
+    height: 50px;
+    overflow: hidden;
+}
+
+.sb-search .sb-search-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    outline: none;
+    background: var(--light);
+    border: 0;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    z-index: 10;
+    padding: 0 65px 0 15px;
+    font-family: inherit;
+    font-size: 20px;
+    color: #333;
+
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+
+    -webkit-appearance: none;
+}
+
+button.formbutton,
+.sb-search-submit {
+    width: 60px;
+    height: 60px;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.sb-search-submit {
+    background: var(--light); /* IE needs this */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
+    filter: alpha(opacity=0); /* IE 5-7 */
+    opacity: 0;
+    color: transparent;
+    border: none;
+    outline: none;
+    z-index: -1;
+}
+
+button.formbutton {
+    color: var(--light);
+    background: var(--primary);
+    z-index: 90;
+    border: 0;
+    height: 50px;
+}
+
+button.formbutton span {
+    font-size: 19px;
+}
+
+button.formbutton:hover {
+    background: var(--primary-dark);
+}
+
+#quotecont {
+    padding: 30px 0;
+}
+
+#quotecont .owl-theme .owl-controls .owl-page span {
+    background: #ccc;
+}
+
+#quotecont .owl-theme .owl-controls .owl-page.active span,
+#quotecont .owl-theme .owl-controls.clickable .owl-page:hover span {
+    background: var(--primary-light);
+}
+
+#footercont {
+    position: relative;
+    font-size: 18px;
+}
+
+.social-links ul li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0 10px;
+}
+
+.social-links ul li a {
+    font-size: 36px;
+    color: var(--dark-gray);
+}
+
+.social-links ul li a:hover {
+    color: var(--primary-light);
+}
+
+/* ==================================================
+   Responsive Media Queries - Tablets
+================================================== */
+
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 23px;
+        line-height: 29px;
+    }
+
+    #topcontainer h1 {
+        font-size: 54px;
+        line-height: 54px;
+        letter-spacing: -1.2px;
+    }
+
+    #topcontainer h1 span {
+        font-size: 70px;
+        line-height: 70px;
+    }
+
+    #countdown #countdowncont {
+        max-width: 400px;
+    }
+
+    #countdown #countdowncont ul#countscript li {
+        width: 50%;
+        padding: 10px 0;
+    }
+
+    #countdown #countdowncont ul#countscript li span {
+        font-size: 70px;
+        line-height: 70px;
+    }
+
+    #quotecont {
+        padding: 15px 0;
+    }
+
+    #footercont {
+        font-size: 19px;
+    }
+
+    #footercont #footerleft {
+        float: none;
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    #footercont .social-links ul li a {
+        font-size: 32px;
+    }
+
+    #footercont #footerright {
+        float: none;
+    }
+}
+
+@for $i from 0 through 10 {
+    .px-#{$i} {
+        padding-left: #{$i}em;
+        padding-right: #{$i}em;
+    }
+    .pl-#{$i} {
+        padding-left: #{$i}em;
+    }
+    .pr-#{$i} {
+        padding-right: #{$i}em;
+    }
+    .py-#{$i} {
+        padding-top: #{$i}em;
+        padding-bottom: #{$i}em;
+    }
+    .pt-#{$i} {
+        padding-top: #{$i}em;
+    }
+    .pb-#{$i} {
+        padding-top: #{$i}em;
+        padding-bottom: #{$i}em;
+    }
+}
+
+/* ==================================================
+   Responsive Media Queries - Mobiles
+================================================== */
+
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 21px;
+        line-height: 27px;
+    }
+
+    #topcontainer h1 {
+        font-size: 36px;
+        line-height: 36px;
+    }
+
+    #topcontainer h1 span {
+        font-size: 50px;
+        line-height: 50px;
+    }
+
+    #countdown #countdowncont ul#countscript li {
+        padding: 6px 0;
+    }
+
+    #countdown #countdowncont ul#countscript li span {
+        font-size: 62px;
+        line-height: 62px;
+    }
+
+    #countdown #countdowncont ul#countscript li p {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    #maincont #signupform {
+        margin: 0 auto 20px auto;
+        width: 100%;
+    }
+
+    #quotecont {
+        padding: 5px 0;
+    }
+
+    #footercont .social-links ul li {
+        margin: 0 5px;
+    }
+
+    #footercont .social-links ul li a {
+        font-size: 28px;
+    }
+}

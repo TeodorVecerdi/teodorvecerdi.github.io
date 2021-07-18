@@ -1,6 +1,0 @@
-User-Agent: *
-Disallow: /
-Disallow: /lang
-Disallow: /img
-Disallow: /device-mockups
-Disallow: /CNAME
