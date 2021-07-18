@@ -5,7 +5,6 @@
 @import url("reset.css");
 @import url("uikit.scrollspy.css");
 
-
 /* ==================================================
    Google Fonts
 ================================================== */
@@ -26,10 +25,6 @@
     --dark-gray: #eeeeee;
     --dark: #ffffff;
     --countdown-text: #eeeeee;
-
-    #greeting:after {
-        content: "👋🏻";
-    }
 
     transition: color 0.5s ease, background-color 0.5s ease, border-bottom-color 0.5s ease, border-left-color 0.5s ease, border-top-color 0.5s ease, border-right-color 0.5s ease;
     -moz-transition: color 0.5s ease, background-color 0.5s ease, border-bottom-color 0.5s ease, border-left-color 0.5s ease, border-top-color 0.5s ease, border-right-color 0.5s ease;
@@ -60,11 +55,6 @@
 
         --countdown-text: #ffffff;
     }
-}
-
-#greeting {
-    font-size: 2.25em;
-    padding-bottom: 0.5em;
 }
 
 @media (prefers-color-scheme: light) {
@@ -134,6 +124,92 @@
    Global Styles
 ================================================== */
 
+
+@for $i from 0 through 10 {
+    .px-#{$i} {
+        padding-left: #{$i}em;
+        padding-right: #{$i}em;
+    }
+    .pl-#{$i} {
+        padding-left: #{$i}em;
+    }
+    .pr-#{$i} {
+        padding-right: #{$i}em;
+    }
+    .py-#{$i} {
+        padding-top: #{$i}em;
+        padding-bottom: #{$i}em;
+    }
+    .pt-#{$i} {
+        padding-top: #{$i}em;
+    }
+    .pb-#{$i} {
+        padding-bottom: #{$i}em;
+    }
+}
+
+@for $i from 1 through 10 {
+    .font-weight-#{$i * 100} {
+        font-weight: #{$i * 100} !important;
+    }
+}
+
+.underlined {
+    text-decoration: underline;
+    text-decoration-thickness: from-font;
+
+    &::selection {
+        text-decoration: underline;
+    }
+
+    &.raised {
+        text-underline-offset: -0.22em;
+    }
+}
+
+.transform {
+    @for $i from 0 through 20 {
+        &.raise-#{$i} {
+            transform: translateY(#{-$i * 0.125}em);
+        }
+
+        &.grow-#{$i} {
+            transform: scale(#{$i * 0.25});
+        }
+
+        @for $j from 0 through 20 {
+            &.grow-#{$i}.raise-#{$j} {
+                transform: scale(#{$i * 0.25}) translateY(#{-$j * 0.125}em);
+            }
+
+            @media screen and (max-width: 480px) {
+                &.grow-#{$i}.raise-#{$j} {
+                }
+
+                &.grow-m-#{$i}.raise-m-#{$j} {
+                    transform: scale(#{$i * 0.25}) translateY(#{-$j * 0.125}em) !important;
+                }
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            &.raise-#{$i} {
+            }
+            &.grow-#{$i} {
+            }
+
+            &.grow-m-#{$i} {
+                transform: scale(#{$i * 0.5}) !important;
+            }
+
+            &.raise-m-#{$i} {
+                transform: translateY(#{-$i * 0.125}em) !important;
+            }
+        }
+    }
+
+}
+
 #theme-toggle {
     position: absolute;
     right: 0;
@@ -142,10 +218,19 @@
     border: none;
     margin: 0;
     padding: 0;
+    z-index: 1000;
 
     &:hover {
         cursor: pointer;
     }
+}
+
+.greeting {
+    font-size: 2.25em;
+    padding-bottom: 0.5em;
+    letter-spacing: normal;
+    font-weight: lighter !important;
+    text-transform: none;
 }
 
 * {
@@ -154,7 +239,7 @@
     box-sizing: border-box;
 }
 
-.no-select {
+.unselectable {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -544,30 +629,6 @@ button.formbutton:hover {
 
     #footercont #footerright {
         float: none;
-    }
-}
-
-@for $i from 0 through 10 {
-    .px-#{$i} {
-        padding-left: #{$i}em;
-        padding-right: #{$i}em;
-    }
-    .pl-#{$i} {
-        padding-left: #{$i}em;
-    }
-    .pr-#{$i} {
-        padding-right: #{$i}em;
-    }
-    .py-#{$i} {
-        padding-top: #{$i}em;
-        padding-bottom: #{$i}em;
-    }
-    .pt-#{$i} {
-        padding-top: #{$i}em;
-    }
-    .pb-#{$i} {
-        padding-top: #{$i}em;
-        padding-bottom: #{$i}em;
     }
 }
 

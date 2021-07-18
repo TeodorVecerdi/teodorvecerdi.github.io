@@ -24,65 +24,71 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/icon-57.png">
     <link rel="shortcut icon" href="images/ico/icon-32.png">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.min.css">
 
     <script src="https://kit.fontawesome.com/90ee79817d.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
     <script src="js/countdown.js"></script>
     <script src="js/uikit.scrollspy.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/main.js"></script>
 </head>
+
 <body class="theme dark">
 
 <button id="theme-toggle">
 </button>
 
-<div class="full-width clearfix">
-    <div id="topcontainer" class="text-dark bodycontainer clearfix" style="max-width: none" data-uk-scrollspy="{cls:'uk-animation-fade', delay: 300, repeat: true}">
-        <p id="greeting">Hello there! </p>
-        <p>I'm Teodor Vecerdi, a second year Game Engineering student at Saxion University of Applied Sciences! 🔨</p>
-        <p>The website is not ready yet, but in the meantime you can check out my stuff at <a href="https://linktr.ee/TeodorVecerdi">linktr.ee/TeodorVecerdi</a>, or at the links
-            below:</p>
-        <div class="social-links clearfix py-1">
-            <ul>
-                <li><a title="GitHub" href="https://github.com/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-github"></span></a></li>
-                <li><a title="Twitter" href="https://twitter.com/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-twitter"></span></a></li>
-                <li><a title="LinkedIn" href="https://linkedin.com/in/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-linkedin"></span></a></li>
-                <li><a title="Instagram" href="https://instagram.com/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-instagram"></span></a></li>
-                <li><a title="Email" href="mailto:teodor.vecerdi@gmail.com" target="_blank" rel="external"><span class="fas fa-envelope"></span></a></li>
-            </ul>
+<main>
+    <section class="full-width clearfix">
+        <div id="topcontainer" class="text-dark bodycontainer clearfix" style="max-width: none" data-uk-scrollspy="{cls:'uk-animation-fade', delay: 300, repeat: true}">
+            <h1 class="unselectable underlined raised font-weight-100 transform raise-5 raise-m-5" style="min-width: auto; width: auto; max-width: auto">vecerdi.dev</h1>
+            <h1 class="greeting">Hello there! 👋🏻</h1>
+            <p>I'm <strong>Teodor Vecerdi</strong>, a second year Game Engineering student at Saxion University of Applied Sciences! 🔨</p>
+            <p>The website is not ready yet, but in the meantime you can check out my stuff at <a href="https://linktr.ee/TeodorVecerdi" target="_blank" rel="external">linktr.ee/TeodorVecerdi</a>,
+                or at the links
+                below:</p>
+            <div class="social-links clearfix pt-1 pb-2">
+                <ul>
+                    <li><a title="GitHub" href="https://github.com/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-github"></span></a></li>
+                    <li><a title="Twitter" href="https://twitter.com/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-twitter"></span></a></li>
+                    <li><a title="LinkedIn" href="https://linkedin.com/in/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-linkedin"></span></a></li>
+                    <li><a title="Instagram" href="https://instagram.com/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-instagram"></span></a></li>
+                    <li><a title="Email" href="mailto:teodor.vecerdi@gmail.com" target="_blank" rel="external"><span class="fas fa-envelope"></span></a></li>
+                </ul>
+            </div>
+            <p>Come back in</p>
         </div>
-        <p>Come back in</p>
-    </div>
-</div>
+    </section>
+    <div class="arrow-separator arrow-white"></div>
+    <section class="full-padding bg-primary-dark clearfix">
+        <div id="countdown" class="bodycontainer clearfix" data-uk-scrollspy="{cls:'uk-animation-fade', delay: 300, repeat: true}">
+            <div id="countdowncont" class="clearfix unselectable">
+                <ul id="countscript">
+                    <li>
+                        <span class="days">00</span>
+                        <p>Days</p>
+                    </li>
+                    <li>
+                        <span class="hours">00</span>
+                        <p>Hours</p>
+                    </li>
+                    <li class="clearbox">
+                        <span class="minutes">00</span>
+                        <p>Minutes</p>
+                    </li>
+                    <li>
+                        <span class="seconds">00</span>
+                        <p>Seconds</p>
+                    </li>
+                </ul>
+            </div>
 
-<div class="arrow-separator arrow-white"></div>
-
-<div class="full-padding bg-primary-dark clearfix">
-    <div id="countdown" class="bodycontainer clearfix" data-uk-scrollspy="{cls:'uk-animation-fade', delay: 300, repeat: true}">
-        <div id="countdowncont" class="clearfix">
-            <ul id="countscript">
-                <li>
-                    <span class="days">00</span>
-                    <p>Days</p>
-                </li>
-                <li>
-                    <span class="hours">00</span>
-                    <p>Hours</p>
-                </li>
-                <li class="clearbox">
-                    <span class="minutes">00</span>
-                    <p>Minutes</p>
-                </li>
-                <li>
-                    <span class="seconds">00</span>
-                    <p>Seconds</p>
-                </li>
-            </ul>
         </div>
+    </section>
+</main>
 
-    </div>
-</div>
 </body>
 </html>
