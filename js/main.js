@@ -1,19 +1,22 @@
-const dark_css = `<span class="fa-stack fa-2x" title="Dark Theme">
+const dark_css = `<span class="fa-stack fa-2x">
         <i class="fas fa-circle fa-stack-2x text-primary"></i>
         <i class="fas fa-moon fa-stack-1x text-light" data-fa-transform="grow-2.5 left-1"></i>
     </span>`;
 
-const light_css = `<span class="fa-stack fa-2x" title="Light Theme">
+const light_css = `<span class="fa-stack fa-2x">
         <i class="fas fa-circle fa-stack-2x text-primary"></i>
         <i class="fas fa-lightbulb fa-stack-1x text-light" data-fa-transform="grow-3"></i>
     </span>`;
 
-const system_css = `<span class="fa-stack fa-2x" title="System Theme">
+const system_css = `<span class="fa-stack fa-2x">
         <i class="fas fa-circle fa-stack-2x text-primary"></i>
         <i class="{0} fa-stack-1x text-light" data-fa-transform="grow-3 left-1"></i>
     </span>`
 
 function applyTheme() {
+    const body = $('body');
+    const toggleButton = $('#theme-toggle');
+
     let preferredTheme = localStorage.getItem('theme');
     if (!preferredTheme) {
         preferredTheme = 'system';
@@ -24,19 +27,22 @@ function applyTheme() {
     switch (preferredTheme) {
         case "dark":
             toggleCss = dark_css;
-            $('body').addClass('dark');
+            body.addClass('dark');
+            toggleButton.attr('aria-label', 'Switch to light theme')
             break;
         case "light":
-            $('body').addClass('light');
             toggleCss = light_css;
+            body.addClass('light');
+            toggleButton.attr('aria-label', 'Switch to system theme')
             break;
         default:
         case "system":
             toggleCss = system_css.formatUnicorn(getThemeIcon(getOS()))
+            toggleButton.attr('aria-label', 'Switch to dark theme')
             break;
     }
 
-    $('#theme-toggle').html(toggleCss);
+    toggleButton.html(toggleCss);
 }
 
 function toggleTheme() {

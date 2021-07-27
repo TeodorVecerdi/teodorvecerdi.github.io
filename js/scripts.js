@@ -170,7 +170,7 @@ function getThemeIcon(os) {
             return 'fab fa-apple';
         case 'Windows':
             return 'fab fa-windows';
-        case Android:
+        case 'Android':
             return 'fab fa-android';
         default:
             return 'fab fa-linux';

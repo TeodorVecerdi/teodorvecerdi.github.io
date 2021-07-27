@@ -13,10 +13,13 @@
 <!--<![endif]-->
 <head>
     <meta charset="UTF-8">
-    <title>Teodor Vecerdi</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Teodor Vecerdi - Portfolio</title>
+    <meta name="description" content="Portfolio website for a game/software engineer">
+    <meta name="keywords" content="game portfolio,game engineer,software engineer,engineer,portfolio">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/icon-144.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/icon-114.png">
@@ -24,61 +27,81 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/icon-57.png">
     <link rel="shortcut icon" href="images/ico/icon-32.png">
 
-    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="preconnect" href="https://ka-f.fontawesome.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link href="css/clean/reset.min.css" rel="stylesheet">
+<!--    <link href="css/clean/uikit_scrollspy.min.css" rel="stylesheet">-->
+    <link href="css/clean/style.min.css" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-184308064-2"></script>
-    <script>
+    <script defer async src="https://www.googletagmanager.com/gtag/js?id=UA-184308064-2"></script>
+    <script defer>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-184308064-2');
     </script>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WVF3XM5');</script>
-    <!-- End Google Tag Manager -->
-
-    <script src="https://kit.fontawesome.com/90ee79817d.js" crossorigin="anonymous"></script>
+    <script defer src="https://kit.fontawesome.com/90ee79817d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"
             referrerpolicy="no-referrer"></script>
+<!--    <script defer src="js/uikit.scrollspy.min.js"></script>-->
     <script src="js/countdown.min.js"></script>
-    <script src="js/uikit.scrollspy.min.js"></script>
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
 </head>
 
 <body class="theme dark">
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVF3XM5"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVF3XM5"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<button id="theme-toggle">
+<!--Temporary until button redesign-->
+<!--
+<svg style="fill: var(&#45;&#45;dark); transform: scale(1.3); transform-origin: top left" xmlns="http://www.w3.org/2000/svg" width="32px" height="32px">
+    <g class="theme-toggle-sun">
+        <path d="M4.7,4.7v22.6h22.6V4.7H4.7z M16,25c-5,0-9-4-9-9s4-9,9-9s9,4,9,9S21,25,16,25z"/>
+        <path d="M16,0L0,16l16,16l16-16L16,0z M16,25c-5,0-9-4-9-9s4-9,9-9s9,4,9,9S21,25,16,25z"/>
+    </g>
+    <path class="theme-toggle-circle" d="M23,16c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S23,12.1,23,16z"/>
+</svg>-->
+
+<button class="aria-tooltip left" id="theme-toggle" aria-label="Change to dark theme">
 </button>
 
 <main>
     <section class="full-width clearfix">
         <div id="topcontainer" class="text-dark bodycontainer clearfix" style="max-width: none" data-uk-scrollspy="{cls:'uk-animation-fade', delay: 300, repeat: true}">
-            <h1 class="unselectable underlined raised font-weight-100 transform raise-5 raise-m-5" style="min-width: auto; width: auto; max-width: auto">vecerdi.dev</h1>
+            <h1 class="unselectable underlined raised font-weight-100 transform raise-5 raise-m-5" style="min-width: auto; width: auto">vecerdi.dev</h1>
             <h1 class="greeting">Hello there! 👋🏻</h1>
             <p>I'm <strong>Teodor Vecerdi</strong>, a second year Game Engineering student at Saxion University of Applied Sciences! 🔨</p>
-            <p>The website is not ready yet, but in the meantime you can check out my stuff at <a href="https://linktr.ee/TeodorVecerdi" target="_blank" rel="external">linktr.ee/TeodorVecerdi</a>,
+            <p>The website is not ready yet, but in the meantime you can check out my stuff at <a href="https://linktr.ee/TeodorVecerdi" target="_blank" rel="noopener">linktr.ee/TeodorVecerdi</a>,
                 or at the links
                 below:</p>
             <div class="social-links clearfix pt-1 pb-2">
                 <ul>
-                    <li><a title="GitHub" href="https://github.com/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-github"></span></a></li>
-                    <li><a title="Twitter" href="https://twitter.com/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-twitter"></span></a></li>
-                    <li><a title="LinkedIn" href="https://linkedin.com/in/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-linkedin"></span></a></li>
-                    <li><a title="Instagram" href="https://instagram.com/TeodorVecerdi" target="_blank" rel="external"><span class="fab fa-instagram"></span></a></li>
-                    <li><a title="Email" href="mailto:teodor.vecerdi@gmail.com" target="_blank" rel="external"><span class="fas fa-envelope"></span></a></li>
+                    <li><a class="aria-tooltip" aria-label="GitHub" href="https://github.com/TeodorVecerdi" target="_blank" rel="noopener"><span class="fab fa-github"></span></a>
+                    </li>
+                    <li><a class="aria-tooltip" aria-label="Twitter" href="https://twitter.com/TeodorVecerdi" target="_blank" rel="noopener"><span
+                            class="fab fa-twitter"></span></a></li>
+                    <li><a class="aria-tooltip" aria-label="LinkedIn" href="https://linkedin.com/in/TeodorVecerdi" target="_blank" rel="noopener"><span
+                            class="fab fa-linkedin"></span></a></li>
+                    <li><a class="aria-tooltip" aria-label="Instagram" href="https://instagram.com/TeodorVecerdi" target="_blank" rel="noopener"><span
+                            class="fab fa-instagram"></span></a></li>
+                    <li><a class="aria-tooltip" aria-label="Email" href="mailto:teodor.vecerdi@gmail.com" target="_blank" rel="noopener"><span class="fas fa-envelope"></span></a>
+                    </li>
                 </ul>
             </div>
             <p>Come back in</p>
