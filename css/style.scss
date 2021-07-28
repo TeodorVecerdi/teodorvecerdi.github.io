@@ -322,8 +322,11 @@ h3 {
             &.grow-#{$i}.raise-#{$j} {
                 transform: scale(#{$i * 0.25}) translateY(#{-$j * 0.125}em);
             }
-
-            @media screen and (max-width: 480px) {
+        }
+    }
+    @media screen and (max-width: 480px) {
+        @for $i from 0 through 20 {
+            @for $j from 0 through 20 {
                 &.grow-#{$i}.raise-#{$j} {
                 }
 
@@ -331,9 +334,7 @@ h3 {
                     transform: scale(#{$i * 0.25}) translateY(#{-$j * 0.125}em) !important;
                 }
             }
-        }
 
-        @media screen and (max-width: 480px) {
             &.raise-#{$i} {
             }
             &.grow-#{$i} {
