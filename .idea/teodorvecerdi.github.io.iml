@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="90ee79817d" level="application" />
+    <orderEntry type="library" name="cookie-consent" level="application" />
   </component>
 </module>

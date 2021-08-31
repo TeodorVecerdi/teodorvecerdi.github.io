@@ -1,0 +1,54 @@
+#freeprivacypolicy-com---nb {
+  background-color: var(--no-theme-darkish) !important;
+  max-width: 33% !important;
+  -webkit-touch-callout: none !important;
+  /* iOS Safari */
+  -webkit-user-select: none !important;
+  /* Safari */
+  -moz-user-select: none !important;
+  /* Old versions of Firefox */
+  -ms-user-select: none !important;
+  /* Internet Explorer/Edge */
+  user-select: none !important;
+}
+#freeprivacypolicy-com---nb .cc-nb-main-container {
+  padding: 1rem !important;
+}
+#freeprivacypolicy-com---nb #cc-nb-text {
+  font-size: 0 !important;
+}
+#freeprivacypolicy-com---nb #cc-nb-text:after {
+  font-size: initial !important;
+  display: block !important;
+  visibility: visible !important;
+  content: "We use cookies and other tracking technologies to analyze our website traffic, and to understand where our visitors are coming from." !important;
+}
+
+.cc-nb-okagree {
+  background-color: var(--primary) !important;
+  color: var(--no-theme-light) !important;
+}
+.cc-nb-okagree:focus {
+  box-shadow: none !important;
+}
+.cc-nb-okagree:hover {
+  background-color: var(--primary-dark) !important;
+}
+
+.cc-nb-reject {
+  border: 1px solid var(--primary) !important;
+  background-color: var(--no-theme-darkish) !important;
+  color: var(--no-theme-light) !important;
+}
+.cc-nb-reject:focus {
+  box-shadow: none !important;
+}
+.cc-nb-reject:hover {
+  background-color: var(--no-theme-dark) !important;
+}
+
+.cc-nb-changep {
+  display: none !important;
+}
+
+/*# sourceMappingURL=cookie-banner.css.map */

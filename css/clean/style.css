@@ -15,9 +15,8 @@ body {
   background: var(--light);
   font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
   font-size: 20px;
-  font-weight: 300;
+  font-weight: var(--default-font-weight);
   line-height: 32px;
-  text-rendering: optimizeLegibility;
   vertical-align: baseline;
 }
 
@@ -52,75 +51,6 @@ h1 {
   letter-spacing: -1px;
   font-weight: 300;
   text-transform: uppercase;
-}
-
-/* ==================================================
-   THEME
-================================================== */
-.theme {
-  --transition-time: 250ms;
-  --tooltip-transition-time: 100ms;
-  --tooltip-delay: 75ms;
-  --primary: hsl(206, 100%, 42%);
-  --primary-light: hsl(206, 100%, 53%);
-  --primary-dark: hsl(206, 100%, 31%);
-  --primary-lighter: hsl(206, 100%, 64%);
-  --primary-darker: hsl(206, 100%, 20%);
-  --light: hsl(0, 0%, 13%);
-  --lightish: hsl(0, 0%, 23%);
-  --gray: hsl(0, 0%, 60%);
-  --dark-gray: hsl(0, 0%, 93%);
-  --dark: hsl(0, 0%, 100%);
-  --countdown-text: var(--dark-gray);
-  transition: color var(--transition-time) linear, background-color var(--transition-time) linear, border-bottom-color var(--transition-time) linear, border-left-color var(--transition-time) linear, border-top-color var(--transition-time) linear, border-right-color var(--transition-time) linear;
-}
-.theme.dark {
-  --primary-lighter: hsl(206, 100%, 64%);
-  --primary-darker: hsl(206, 100%, 20%);
-  --light: hsl(0, 0%, 13%);
-  --lightish: hsl(0, 0%, 23%);
-  --gray: hsl(0, 0%, 60%);
-  --dark-gray: hsl(0, 0%, 93%);
-  --dark: hsl(0, 0%, 100%);
-  --countdown-text: var(--dark-gray);
-}
-.theme.light {
-  --primary-lighter: hsl(206, 100%, 64%);
-  --primary-darker: hsl(206, 100%, 20%);
-  --light: hsl(0, 0%, 100%);
-  --lightish: hsl(0, 0%, 93%);
-  --gray: hsl(0, 0%, 93%);
-  --dark-gray: hsl(0, 0%, 60%);
-  --dark: hsl(0, 0%, 13%);
-  --countdown-text: var(--light);
-}
-
-@media (prefers-color-scheme: light) {
-  .theme {
-    --primary-lighter: hsl(206, 100%, 64%);
-    --primary-darker: hsl(206, 100%, 20%);
-    --light: hsl(0, 0%, 100%);
-    --lightish: hsl(0, 0%, 93%);
-    --gray: hsl(0, 0%, 93%);
-    --dark-gray: hsl(0, 0%, 60%);
-    --dark: hsl(0, 0%, 13%);
-    --countdown-text: var(--light);
-  }
-}
-.text-light {
-  color: var(--light);
-}
-
-.text-dark {
-  color: var(--dark);
-}
-
-.text-primary {
-  color: var(--primary);
-}
-
-.bg-primary-dark {
-  background-color: var(--primary-dark);
 }
 
 /* ==================================================
@@ -163,16 +93,95 @@ h1 {
   transform: translateY(-50%) scale(1);
 }
 
-.pt-1 {
-  padding-top: 1em;
+.flex {
+  display: flex;
+}
+.flex.column {
+  flex-direction: column;
+}
+.flex.wrap {
+  flex-wrap: wrap;
+}
+.flex.justify-content-center {
+  justify-content: center;
+}
+.flex.align-items-center {
+  align-items: center;
 }
 
-.pb-2 {
-  padding-bottom: 2em;
+.mt-0 {
+  margin-top: 0em !important;
 }
 
-.font-weight-100 {
-  font-weight: 100 !important;
+.mb-1 {
+  margin-bottom: 0.25em !important;
+}
+
+.mx-1 {
+  margin-left: 0.25em !important;
+  margin-right: 0.25em !important;
+}
+
+.mt-3 {
+  margin-top: 0.75em !important;
+}
+
+@media (max-width: 768px) {
+
+  .mt-tablet-1 {
+    margin-top: 0.25em !important;
+  }
+}
+
+.pb-0 {
+  padding-bottom: 0em !important;
+}
+
+.px-0 {
+  padding-left: 0em !important;
+  padding-right: 0em !important;
+}
+
+.pb-3 {
+  padding-bottom: 0.75em !important;
+}
+
+@media (max-width: 768px) {
+
+  .pb-tablet-0 {
+    padding-bottom: 0em !important;
+  }
+
+  .px-tablet-5 {
+    padding-left: 1.25em !important;
+    padding-right: 1.25em !important;
+  }
+}
+@media (max-width: 480px) {
+
+  .pb-phone-0 {
+    padding-bottom: 0em !important;
+  }
+
+  .px-phone-5 {
+    padding-left: 1.25em !important;
+    padding-right: 1.25em !important;
+  }
+}
+
+.fw-600 {
+  font-weight: 600 !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+@media (max-width: 768px) {
+
+  .text-tablet-justify {
+    text-align: justify !important;
+  }
 }
 
 .underlined {
@@ -188,22 +197,8 @@ h1 {
 .transform.grow-2 {
   transform: scale(0.5);
 }
-.transform.grow-2.raise-5 {
-  transform: scale(0.5) translateY(-0.625em);
-}
 .transform.grow-3 {
   transform: scale(0.75);
-}
-.transform.grow-3.raise-5 {
-  transform: scale(0.75) translateY(-0.625em);
-}
-.transform.raise-5 {
-  transform: translateY(-0.625em);
-}
-@media screen and (max-width: 480px) {
-  .transform.raise-m-5 {
-    transform: translateY(-0.625em) !important;
-  }
 }
 
 #theme-toggle {
@@ -247,119 +242,24 @@ h1 {
   user-select: none;
 }
 
+#vecerdi-dev-title::after {
+  content: "vecerdi.dev";
+}
+
 /* ==================================================
    Separator Arrows
 ================================================== */
-.arrow-separator {
-  position: relative;
-}
-
-.arrow-separator:after {
-  top: 100%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-width: 12px;
-  left: 50%;
-  margin-left: -12px;
-  z-index: 11;
-}
-
-.arrow-white:after {
-  border-color: var(--light) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
-  /** Using RGB to remove dark line in Firefox **/
-}
 
 /* ==================================================
    General Layout Styles
 ================================================== */
-.full-padding {
-  width: 100%;
-  padding: 60px 30px;
-  min-width: 280px;
-}
-
-.full-padding .bodycontainer {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1000px;
-  text-align: center;
-}
 
 .full-width {
   width: 100%;
-  padding-top: 100px;
-  padding-right: 30px;
-  padding-left: 30px;
-  padding-bottom: 10px;
-  min-width: 280px;
 }
 
-.full-width .bodycontainer {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1000px;
-  text-align: center;
-}
-
-#topcontainer h1 {
-  padding: 6px 0 10px 0;
-  margin-bottom: 0;
-  letter-spacing: -1.5px;
-  font-weight: 400;
-}
-
-#topcontainer h1 span {
-  font-size: 70px;
-  line-height: 70px;
-  letter-spacing: -1.4px;
-  font-weight: 300;
-}
-
-#topcontainer p {
-  margin-bottom: 0;
-}
-
-#topcontainer p span {
-  font-size: 90px;
-  line-height: 90px;
-}
-
-#countdown {
-  color: var(--light);
-}
-
-#countdown #countdowncont {
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-#countdown #countdowncont ul#countscript li {
-  float: left;
-  width: 25%;
-  padding: 30px 0;
-  margin: 0;
-  list-style-type: none;
-}
-
-#countdown #countdowncont ul#countscript li span {
-  font-size: 80px;
-  line-height: 80px;
-  font-weight: 300;
-  color: var(--countdown-text);
-}
-
-#countdown #countdowncont ul#countscript li p {
-  color: var(--countdown-text);
-  font-weight: 300;
-  text-transform: uppercase;
-  font-size: 18px;
-  line-height: 18px;
-  margin: 0;
+.full-height {
+  height: 100%;
 }
 
 .social-links ul li {
@@ -380,69 +280,31 @@ h1 {
 /* ==================================================
    Responsive Media Queries - Tablets
 ================================================== */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   body {
     font-size: 23px;
     line-height: 29px;
-  }
-
-  #topcontainer h1 {
-    font-size: 54px;
-    line-height: 54px;
-    letter-spacing: -1.2px;
-  }
-
-  #topcontainer h1 span {
-    font-size: 70px;
-    line-height: 70px;
-  }
-
-  #countdown #countdowncont {
-    max-width: 400px;
-  }
-
-  #countdown #countdowncont ul#countscript li {
-    width: 50%;
-    padding: 10px 0;
-  }
-
-  #countdown #countdowncont ul#countscript li span {
-    font-size: 70px;
-    line-height: 70px;
   }
 }
 /* ==================================================
    Responsive Media Queries - Mobiles
 ================================================== */
-@media screen and (max-width: 480px) {
+@media (max-width: 480px) {
   body {
     font-size: 21px;
     line-height: 27px;
   }
-
-  #topcontainer h1 {
-    font-size: 36px;
-    line-height: 36px;
+}
+@media (min-width: 2560px) {
+  body {
+    font-size: 2rem;
+    line-height: calc((29/23) * 2rem);
   }
 
-  #topcontainer h1 span {
-    font-size: 50px;
-    line-height: 50px;
-  }
-
-  #countdown #countdowncont ul#countscript li {
-    padding: 6px 0;
-  }
-
-  #countdown #countdowncont ul#countscript li span {
-    font-size: 62px;
-    line-height: 62px;
-  }
-
-  #countdown #countdowncont ul#countscript li p {
-    font-size: 16px;
-    line-height: 16px;
+  .social-links ul li a {
+    font-size: 3rem;
   }
 }
+/* COOKIE BANNER */
 
 /*# sourceMappingURL=style.css.map */

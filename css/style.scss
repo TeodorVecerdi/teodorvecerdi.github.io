@@ -2,6 +2,335 @@
    GENERAL
 ================================================== */
 
+$breakpoints: (
+        'phone': 480px,
+        'tablet': 768px,
+        'desktop': 1024px,
+        'huge': 2560px,
+) !default;
+
+///
+/// Creates a list of static expressions or media types
+///
+/// @author Eduardo Boucas
+///
+/// @example scss - Creates a single media type (screen)
+///  $media-expressions: ('screen': 'screen');
+///
+/// @example scss - Creates a static expression with logical disjunction (OR operator)
+///  $media-expressions: (
+///   'retina2x': (
+///     '(-webkit-min-device-pixel-ratio: 2)',
+///     '(min-resolution: 192dpi)'
+///   )
+/// );
+///
+$media-expressions: (
+        'screen': 'screen',
+        'print': 'print',
+        'handheld': 'handheld',
+        'retina2x': (
+                '(-webkit-min-device-pixel-ratio: 2)',
+                '(min-resolution: 192dpi)'
+        ),
+        'retina3x': (
+                '(-webkit-min-device-pixel-ratio: 3)',
+                '(min-resolution: 350dpi)'
+        )
+) !default;
+
+///
+/// Defines a number to be added or subtracted from each unit when declaring breakpoints with exclusive intervals
+///
+/// @author Eduardo Boucas
+///
+/// @example scss - Interval for pixels is defined as `1` by default
+///  @include media(">128px") {}
+///
+///  /* Generates: */
+///  @media (min-width: 129px) {}
+///
+/// @example scss - Interval for ems is defined as `0.01` by default
+///  @include media(">20em") {}
+///
+///  /* Generates: */
+///  @media (min-width: 20.01em) {}
+///
+/// @example scss - Interval for rems is defined as `0.1` by default, to be used with `font-size: 62.5%;`
+///  @include media(">2.0rem") {}
+///
+///  /* Generates: */
+///  @media (min-width: 2.1rem) {}
+///
+$unit-intervals: (
+        'px': 1,
+        'em': 0.01,
+        'rem': 0.1
+) !default;
+///
+/// Generates a media query based on a list of conditions
+///
+/// @author Eduardo Boucas
+///
+/// @param {List}   $conditions  - Media query conditions
+///
+/// @example scss - With a single set breakpoint
+///  @include media(">phone") { }
+///
+/// @example scss - With two set breakpoints
+///  @include media(">phone", "<=tablet") { }
+///
+/// @example scss - With custom values
+///  @include media(">=358px", "<850px") { }
+///
+/// @example scss - With set breakpoints with custom values
+///  @include media(">desktop", "<=1350px") { }
+///
+/// @example scss - With a static expression
+///  @include media("retina2x") { }
+///
+/// @example scss - Mixing everything
+///  @include media(">=350px", "<tablet", "retina3x") { }
+///
+@mixin media($conditions...) {
+    @for $i from 1 through length($conditions) {
+        $conditions: set-nth($conditions, $i, parse-expression(nth($conditions, $i)));
+    }
+
+    $branches: get-query-branches($conditions);
+    $query: '';
+
+    @each $branch in $branches {
+        @if (str-length($query) != 0) {
+            $query: $query + ', ';
+        }
+
+        $query: $query + $branch;
+    }
+
+    @media #{$query} {
+        @content;
+    }
+}
+
+///
+/// Reads a list of media query expressions and separates logical disjunctions into different branches
+///
+/// @author Eduardo Boucas
+///
+/// @param {List}   $expressions  - list of expressions
+///
+/// @throws `$expression` is not a valid expression
+///
+/// @return {List | Null}
+///
+@function get-query-branches($expressions) {
+    $result: '';
+    $has-groups: false;
+
+    // Getting initial snapshot and looking for groups
+    @each $expression in $expressions {
+        @if (str-length($result) != 0) {
+            $result: $result + ' and ';
+        }
+
+        @if (type-of($expression) == 'string') {
+            $result: $result + $expression;
+        } @else if (type-of($expression) == 'list') {
+            $result: $result + nth($expression, 1);
+            $has-groups: true;
+        } @else {
+            @warn '#{$expression} is not a valid expression.';
+        }
+    }
+
+    // If we have groups, we have to create all possible combinations
+    @if $has-groups {
+        @each $expression in $expressions {
+            @if (type-of($expression) == 'list') {
+                $first: nth($expression, 1);
+
+                @each $member in $expression {
+                    @if ($member != $first) {
+                        @each $partial in $result {
+                            $result: join($result, str-replace-first($first, $member, $partial));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @return $result;
+}
+
+///
+/// Parses a string to form a media query expression
+///
+/// @author Eduardo Boucas
+///
+/// @param {String}   $expression  - expression (in string)
+///
+/// @throws Expression with type `type-of($expression)` detected, string expected
+/// @throws `$expression` is missing an operator
+/// @throws Unknown unit: `$unit`
+///
+/// @return {String | Null}
+///
+@function parse-expression($expression) {
+    $operator: '';
+    $value: '';
+    $element: '';
+    $result: '';
+    $is-width: true;
+
+    @if (type-of($expression) != 'string') {
+        @warn 'Expression with type `#{type-of($expression)}` detected, string expected.';
+    }
+
+    // Separating the operator from the rest of the expression
+    @if (str-slice($expression, 2, 2) == '=') {
+        $operator: str-slice($expression, 1, 2);
+        $value: str-slice($expression, 3);
+    } @else {
+        $operator: str-slice($expression, 1, 1);
+        $value: str-slice($expression, 2);
+    }
+
+    // Checking what type of expression we're dealing with
+    @if map-has-key($breakpoints, $value) {
+        $result: map-get($breakpoints, $value);
+    } @else if map-has-key($media-expressions, $expression) {
+        $result: map-get($media-expressions, $expression);
+        $is-width: false;
+    } @else {
+        $result: to-number($value);
+    }
+
+    @if ($is-width) {
+        $unit: unit($result);
+        $interval: 0;
+
+        @if (map-has-key($unit-intervals, $unit)) {
+            $interval: map-get($unit-intervals, $unit);
+        } @else {
+            @warn 'Unknown unit: #{$unit}';
+        }
+
+        @if ($operator == '>') {
+            $element: '(min-width: #{$result + $interval})';
+        } @else if ($operator == '<') {
+            $element: '(max-width: #{$result - $interval})';
+        } @else if ($operator == '>=') {
+            $element: '(min-width: #{$result})';
+        } @else if ($operator == '<=') {
+            $element: '(max-width: #{$result})';
+        } @else {
+            @warn '#{$expression} is missing an operator.';
+        }
+    } @else {
+        $element: $result;
+    }
+
+    @return $element;
+}
+
+///
+/// Replaces the first occurence of the string with the replacement string
+///
+/// @author Eduardo Boucas
+///
+/// @param {String}   $search  - The value being searched for
+/// @param {String}   $replace  - The replacement string
+/// @param {String}   $subject  - The string being replaced on
+///
+/// @return {String | Null}
+///
+@function str-replace-first($search, $replace, $subject) {
+    $search-start: str-index($subject, $search);
+
+    @if $search-start == null {
+        @return $subject;
+    }
+
+    $result: str-slice($subject, 0, $search-start - 1);
+    $result: $result + $replace;
+    $result: $result + str-slice($subject, $search-start + str-length($search));
+
+    @return $result;
+}
+
+///
+/// Casts a number to a string
+///
+/// @author Hugo Giraudel
+///
+/// @param {String}   $string  - Number to be parsed
+///
+/// @return {List | Null}
+///
+@function to-number($string) {
+    // Matrices
+    $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
+    $numbers:  0   1   2   3   4   5   6   7   8   9;
+
+    // Result
+    $result: 0;
+    $divider: 0;
+    $minus: false;
+
+    // Looping through all characters
+    @for $i from 1 through str-length($string) {
+        $character: str-slice($string, $i, $i);
+        $index: index($strings, $character);
+
+
+        @if $character == '-' {
+            $minus: true;
+        }
+
+        @else if $character == '.' {
+            $divider: 1;
+        }
+
+        @else {
+            @if type-of($index) != 'number' {
+                $result: if($minus, $result * -1, $result);
+                @return _length($result, str-slice($string, $i));
+            }
+
+            $number: nth($numbers, $index);
+
+            @if $divider == 0 {
+                $result: $result * 10;
+            }
+
+            @else {
+                // Move the decimal dot to the left
+                $divider: $divider * 10;
+                $number: $number / $divider;
+            }
+
+            $result: $result + $number;
+        }
+    }
+
+    @return if($minus, $result * -1, $result);
+}
+
+@function _length($number, $unit) {
+    $strings: 'px' 'cm' 'mm' '%' 'ch' 'pica' 'in' 'em' 'rem' 'pt' 'pc' 'ex' 'vw' 'vh' 'vmin' 'vmax';
+    $units:   1px  1cm  1mm  1%  1ch  1pica  1in  1em  1rem  1pt  1pc  1ex  1vw  1vh  1vmin  1vmax;
+    $index: index($strings, $unit);
+
+    @if type-of($index) != 'number' {
+        @warn 'Unknown unit `#{$unit}`.';
+        @return false;
+    }
+
+    @return $number * nth($units, $index);
+}
+
 html {
     height: 100%;
     overflow: auto;
@@ -18,9 +347,8 @@ body {
 
     font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: var(--default-font-weight);
     line-height: 32px;
-    text-rendering: optimizeLegibility;
     vertical-align: baseline;
 }
 
@@ -80,139 +408,6 @@ h3 {
 }
 
 /* ==================================================
-   THEME
-================================================== */
-
-.theme {
-    // timings
-    --transition-time: 250ms;
-    --tooltip-transition-time: 100ms;
-    --tooltip-delay: 75ms;
-
-    --primary: hsl(206, 100%, 42%);
-    --primary-light: hsl(206, 100%, 53%);
-    --primary-dark: hsl(206, 100%, 31%);
-
-    // auto dark
-    --primary-lighter: hsl(206, 100%, 64%);
-    --primary-darker: hsl(206, 100%, 20%);
-
-    --light: hsl(0, 0%, 13%);
-    --lightish: hsl(0, 0%, 23%);
-    --gray: hsl(0, 0%, 60%);
-    --dark-gray: hsl(0, 0%, 93%);
-    --dark: hsl(0, 0%, 100%);
-
-    --countdown-text: var(--dark-gray);
-
-    transition: color var(--transition-time) linear, background-color var(--transition-time) linear, border-bottom-color var(--transition-time) linear, border-left-color var(--transition-time) linear, border-top-color var(--transition-time) linear, border-right-color var(--transition-time) linear;
-
-    // forced dark
-    &.dark {
-        --primary-lighter: hsl(206, 100%, 64%);
-        --primary-darker: hsl(206, 100%, 20%);
-        --light: hsl(0, 0%, 13%);
-        --lightish: hsl(0, 0%, 23%);
-        --gray: hsl(0, 0%, 60%);
-        --dark-gray: hsl(0, 0%, 93%);
-        --dark: hsl(0, 0%, 100%);
-        --countdown-text: var(--dark-gray);
-    }
-
-    // forced light
-    &.light {
-        --primary-lighter: hsl(206, 100%, 64%);
-        --primary-darker: hsl(206, 100%, 20%);
-
-        --light: hsl(0, 0%, 100%);
-        --lightish: hsl(0, 0%, 93%);
-        --gray: hsl(0, 0%, 93%);
-        --dark-gray: hsl(0, 0%, 60%);
-        --dark: hsl(0, 0%, 13%);
-
-        --countdown-text: var(--light);
-    }
-}
-
-@media (prefers-color-scheme: light) {
-    .theme {
-        --primary-lighter: hsl(206, 100%, 64%);
-        --primary-darker: hsl(206, 100%, 20%);
-        --light: hsl(0, 0%, 100%);
-        --lightish: hsl(0, 0%, 93%);
-        --gray: hsl(0, 0%, 93%);
-        --dark-gray: hsl(0, 0%, 60%);
-        --dark: hsl(0, 0%, 13%);
-
-        --countdown-text: var(--light);
-    }
-}
-
-//region Theme Classes
-.text-light {
-    color: var(--light);
-}
-
-.text-gray {
-    color: var(--gray);
-}
-
-.text-dark-gray {
-    color: var(--dark-gray);
-}
-
-.text-dark {
-    color: var(--dark);
-}
-
-.text-primary {
-    color: var(--primary);
-}
-
-.text-primary-light {
-    color: var(--primary-light);
-}
-
-.text-primary-dark {
-    color: var(--primary-dark);
-}
-
-.text-primary-lighter {
-    color: var(--primary-lighter);
-}
-
-.text-primary-darker {
-    color: var(--primary-darker);
-}
-
-.bg-primary {
-    background-color: var(--primary);
-}
-
-.bg-primary-light {
-    background-color: var(--primary-light);
-}
-
-.bg-primary-dark {
-    background-color: var(--primary-dark);
-}
-
-.bg-primary-lighter {
-    background-color: var(--primary-lighter);
-}
-
-.bg-primary-darker {
-    background-color: var(--primary-darker);
-}
-
-.bg-gray {
-    background-color: var(--gray);
-}
-
-//endregion
-
-
-/* ==================================================
    Global Styles
 ================================================== */
 
@@ -265,35 +460,259 @@ h3 {
     }
 }
 
+.flex {
+    display: flex;
 
-@for $i from 0 through 10 {
-    .px-#{$i} {
-        padding-left: #{$i}em;
-        padding-right: #{$i}em;
+    &.column {
+        flex-direction: column;
     }
-    .pl-#{$i} {
-        padding-left: #{$i}em;
+    &.column-reverse {
+        flex-direction: column-reverse;
     }
-    .pr-#{$i} {
-        padding-right: #{$i}em;
+    &.row {
+        flex-direction: row;
     }
-    .py-#{$i} {
-        padding-top: #{$i}em;
-        padding-bottom: #{$i}em;
+    &.row-reverse {
+        flex-direction: row-reverse;
     }
-    .pt-#{$i} {
-        padding-top: #{$i}em;
+
+    &.wrap {
+        flex-wrap: wrap;
     }
-    .pb-#{$i} {
-        padding-bottom: #{$i}em;
+
+    &.nowrap {
+        flex-wrap: nowrap;
+    }
+
+    &.justify-content-center {
+        justify-content: center;
+    }
+    &.justify-content-start {
+        justify-content: start;
+    }
+    &.justify-content-end {
+        justify-content: end;
+    }
+    &.justify-content-space-around {
+        justify-content: space-around;
+    }
+    &.justify-content-space-between {
+        justify-content: space-between;
+    }
+    &.justify-content-space-evenly {
+        justify-content: space-evenly;
+    }
+
+    &.align-items-center {
+        align-items: center;
+    }
+    &.align-items-start {
+        align-items: start;
+    }
+    &.align-items-end {
+        align-items: end;
+    }
+    &.align-items-stretch {
+        align-items: stretch;
+    }
+    &.align-items-baseline {
+        align-items: baseline;
+    }
+
+    &.align-content-center {
+        align-content: center;
+    }
+    &.align-content-start {
+        align-content: start;
+    }
+    &.align-content-end {
+        align-content: end;
+    }
+    &.align-content-stretch {
+        align-content: stretch;
+    }
+    &.align-content-space-around {
+        align-content: space-around;
+    }
+    &.align-content-space-between {
+        align-content: space-between;
     }
 }
 
-@for $i from 1 through 10 {
-    .font-weight-#{$i * 100} {
-        font-weight: #{$i * 100} !important;
+@mixin _left($prefix, $suffix, $expr, $val) {
+    .#{$prefix}l#{$suffix} {
+        #{$expr}-left: #{$val} !important;
     }
 }
+
+@mixin _right($prefix, $suffix, $expr, $val) {
+    .#{$prefix}r#{$suffix} {
+        #{$expr}-right: #{$val} !important;
+    }
+}
+
+@mixin _top($prefix, $suffix, $expr, $val) {
+    .#{$prefix}t#{$suffix} {
+        #{$expr}-top: #{$val} !important;
+    }
+}
+
+@mixin _bottom($prefix, $suffix, $expr, $val) {
+    .#{$prefix}b#{$suffix} {
+        #{$expr}-bottom: #{$val} !important;
+    }
+}
+
+@mixin _axis_x($prefix, $suffix, $expr, $val) {
+    .#{$prefix}x#{$suffix} {
+        #{$expr}-left: #{$val} !important;
+        #{$expr}-right: #{$val} !important;
+    }
+}
+
+
+@mixin _axis_y($prefix, $suffix, $expr, $val) {
+    .#{$prefix}y#{$suffix} {
+        #{$expr}-top: #{$val} !important;
+        #{$expr}-bottom: #{$val} !important;
+    }
+}
+
+@mixin _expr($class_name, $expr, $val) {
+    .#{$class_name} {
+        #{$expr}: #{$val};
+    }
+}
+
+@mixin lrtbxy($prefix, $suffix, $expr, $val) {
+    @include _left($prefix, $suffix, $expr, $val);
+    @include _right($prefix, $suffix, $expr, $val);
+    @include _top($prefix, $suffix, $expr, $val);
+    @include _bottom($prefix, $suffix, $expr, $val);
+    @include _axis_x($prefix, $suffix, $expr, $val);
+    @include _axis_y($prefix, $suffix, $expr, $val);
+}
+
+@mixin media-queries($class_name, $suffix, $expr, $val) {
+    .#{$class_name}#{$suffix} {
+        #{$expr}: #{$val};
+    }
+
+    @include media("<=tablet") {
+        .#{$class_name}-tablet#{$suffix} {
+            #{$expr}: #{$val};
+
+            &.#{$class_name}#{$suffix} {
+                #{$expr}: unset;
+            }
+        }
+    }
+
+    @include media("<=phone") {
+        .#{$class_name}-phone#{$suffix} {
+            #{$expr}: #{$val};
+
+            &.#{$class_name}#{$suffix} {
+                #{$expr}: unset;
+            }
+        }
+    }
+}
+
+@mixin media-queries-multi($class_name, $suffix, $val, $exprs...) {
+    .#{$class_name}#{$suffix} {
+        @each $expr in $exprs {
+            #{$expr}: #{$val};
+        }
+    }
+
+    @include media("<=tablet") {
+        .#{$class_name}-tablet#{$suffix} {
+            @each $expr in $exprs {
+                #{$expr}: #{$val};
+            }
+
+            &.#{$class_name}#{$suffix} {
+                @each $expr in $exprs {
+                    #{$expr}: unset;
+                }
+            }
+        }
+    }
+
+    @include media("<=phone") {
+        .#{$class_name}-phone#{$suffix} {
+            @each $expr in $exprs {
+                #{$expr}: #{$val};
+            }
+
+            &.#{$class_name}#{$suffix} {
+                @each $expr in $exprs {
+                    #{$expr}: unset;
+                }
+            }
+        }
+    }
+}
+
+$__map_0: ("m": "margin", "p": "padding");
+$__steps_0: 10;
+$__multiplier_0: 0.25;
+@each $key in map-keys($__map_0) {
+    $val: map-get($__map_0, $key);
+    @for $i from 0 through $__steps_0 {
+        @include lrtbxy("#{$key}", "-#{$i}", "#{$val}", #{$i * $__multiplier_0}em);
+    }
+
+    @include media("<=tablet") {
+        @for $i from 0 through $__steps_0 {
+            @include lrtbxy("#{$key}", "-tablet-#{$i}", "#{$val}", #{$i * $__multiplier_0}em);
+        }
+    }
+    @include media("<=phone") {
+        @for $i from 0 through $__steps_0 {
+            @include lrtbxy("#{$key}", "-phone-#{$i}", "#{$val}", #{$i * $__multiplier_0}em);
+        }
+    }
+}
+
+$__steps_1: 10;
+@for $i from 1 through $__steps_1 {
+    @include _expr("fw-#{$i * 100}", "font-weight", "#{$i * 100} !important");
+}
+@each $alignment in ("start", "center", "end", "justify") {
+    @include _expr("text-#{$alignment}", "text-align", "#{$alignment} !important");
+}
+
+@include media("<=tablet") {
+    @for $i from 1 through $__steps_1 {
+        @include _expr("fw-tablet-#{$i * 100}", "font-weight", "#{$i * 100} !important");
+    }
+    @each $alignment in ("start", "center", "end", "justify") {
+        @include _expr("text-tablet-#{$alignment}", "text-align", "#{$alignment} !important");
+    }
+}
+
+@include media("<=phone") {
+    @for $i from 1 through $__steps_1 {
+        @include _expr("fw-phone-#{$i * 100}", "font-weight", "#{$i * 100} !important");
+    }
+    @each $alignment in ("start", "center", "end", "justify") {
+        @include _expr("text-phone-#{$alignment}", "text-align", "#{$alignment} !important");
+    }
+}
+
+$__list_0: ("0.25", "0.5", "0.75", "1", "1.25", "1.5", "1.75", "2", "2.5", "3", "3.5", "4");
+@each $scale in $__list_0 {
+    $scale_str: str-replace-first(".", "_", $scale);
+    .scale-#{$scale_str}x {
+        transform-origin: top center;
+        & > * {
+            transform: scale(#{$scale});
+        }
+    }
+}
+
 
 .underlined {
     text-decoration: underline;
@@ -309,7 +728,8 @@ h3 {
 }
 
 .transform {
-    @for $i from 0 through 20 {
+    $steps: 50;
+    @for $i from 0 through $steps {
         &.raise-#{$i} {
             transform: translateY(#{-$i * 0.125}em);
         }
@@ -318,33 +738,25 @@ h3 {
             transform: scale(#{$i * 0.25});
         }
 
-        @for $j from 0 through 20 {
+        @for $j from 0 through $steps {
             &.grow-#{$i}.raise-#{$j} {
                 transform: scale(#{$i * 0.25}) translateY(#{-$j * 0.125}em);
             }
         }
     }
-    @media screen and (max-width: 480px) {
-        @for $i from 0 through 20 {
-            @for $j from 0 through 20 {
-                &.grow-#{$i}.raise-#{$j} {
-                }
-
-                &.grow-m-#{$i}.raise-m-#{$j} {
+    @include media("<=phone") {
+        @for $i from 0 through $steps {
+            @for $j from 0 through $steps {
+                &.grow-phone-#{$i}.raise-phone-#{$j} {
                     transform: scale(#{$i * 0.25}) translateY(#{-$j * 0.125}em) !important;
                 }
             }
 
-            &.raise-#{$i} {
-            }
-            &.grow-#{$i} {
-            }
-
-            &.grow-m-#{$i} {
+            &.grow-phone-#{$i} {
                 transform: scale(#{$i * 0.5}) !important;
             }
 
-            &.raise-m-#{$i} {
+            &.raise-phone-#{$i} {
                 transform: translateY(#{-$i * 0.125}em) !important;
             }
         }
@@ -388,6 +800,10 @@ h3 {
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
+}
+
+#vecerdi-dev-title::after {
+    content: "vecerdi.dev";
 }
 
 /* ==================================================
@@ -447,11 +863,10 @@ h3 {
 
 .full-width {
     width: 100%;
-    padding-top: 100px;
-    padding-right: 30px;
-    padding-left: 30px;
-    padding-bottom: 10px;
-    min-width: 280px;
+}
+
+.full-height {
+    height: 100%;
 }
 
 .full-width .bodycontainer {
@@ -461,84 +876,35 @@ h3 {
     text-align: center;
 }
 
-#topcontainer h1 {
+.main-container {
+    /*display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;*/
+}
+
+.main-container h1 {
     padding: 6px 0 10px 0;
     margin-bottom: 0;
     letter-spacing: -1.5px;
     font-weight: 400;
 }
 
-#topcontainer h1 span {
+.main-container h1 span {
     font-size: 70px;
     line-height: 70px;
     letter-spacing: -1.4px;
     font-weight: 300;
 }
 
-#topcontainer p {
+.main-container p {
     margin-bottom: 0;
 }
 
-#topcontainer p span {
+.main-container p span {
     font-size: 90px;
     line-height: 90px;
-}
-
-#countdown {
-    color: var(--light);
-}
-
-#countdown #countdowncont {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-#countdown #countdowncont ul#countscript li {
-    float: left;
-    width: 25%;
-    padding: 30px 0;
-    margin: 0;
-    list-style-type: none;
-}
-
-#countdown #countdowncont ul#countscript li span {
-    font-size: 80px;
-    line-height: 80px;
-    font-weight: 300;
-    color: var(--countdown-text);
-}
-
-#countdown #countdowncont ul#countscript li p {
-    color: var(--countdown-text);
-    font-weight: 300;
-    text-transform: uppercase;
-    font-size: 18px;
-    line-height: 18px;
-    margin: 0;
-}
-
-#maincont {
-    color: var(--light);
-}
-
-#maincont a {
-    color: var(--light);
-    opacity: 0.6;
-}
-
-#maincont a:hover {
-    opacity: 1;
-}
-
-#maincont #signupform {
-    margin: 0 auto 20px auto;
-    width: 80%;
-}
-
-#footercont {
-    position: relative;
-    font-size: 18px;
 }
 
 .social-links ul li {
@@ -560,53 +926,21 @@ h3 {
    Responsive Media Queries - Tablets
 ================================================== */
 
-@media screen and (max-width: 768px) {
+@include media("<=tablet") {
     body {
         font-size: 23px;
         line-height: 29px;
     }
 
-    #topcontainer h1 {
+    .main-container h1 {
         font-size: 54px;
         line-height: 54px;
         letter-spacing: -1.2px;
     }
 
-    #topcontainer h1 span {
+    .main-container h1 span {
         font-size: 70px;
         line-height: 70px;
-    }
-
-    #countdown #countdowncont {
-        max-width: 400px;
-    }
-
-    #countdown #countdowncont ul#countscript li {
-        width: 50%;
-        padding: 10px 0;
-    }
-
-    #countdown #countdowncont ul#countscript li span {
-        font-size: 70px;
-        line-height: 70px;
-    }
-
-    #footercont {
-        font-size: 19px;
-    }
-
-    #footercont #footerleft {
-        float: none;
-        padding: 30px 0;
-        text-align: center;
-    }
-
-    #footercont .social-links ul li a {
-        font-size: 32px;
-    }
-
-    #footercont #footerright {
-        float: none;
     }
 }
 
@@ -614,41 +948,33 @@ h3 {
    Responsive Media Queries - Mobiles
 ================================================== */
 
-@media screen and (max-width: 480px) {
+@include media("<=phone") {
     body {
         font-size: 21px;
         line-height: 27px;
     }
 
-    #topcontainer h1 {
+    .main-container h1 {
         font-size: 36px;
         line-height: 36px;
     }
 
-    #topcontainer h1 span {
+    .main-container h1 span {
         font-size: 50px;
         line-height: 50px;
     }
+}
 
-    #countdown #countdowncont ul#countscript li {
-        padding: 6px 0;
+@include media(">=huge") {
+    body {
+        font-size: 2rem;
+        line-height: calc((29/23) * 2rem);
     }
 
-    #countdown #countdowncont ul#countscript li span {
-        font-size: 62px;
-        line-height: 62px;
-    }
-
-    #countdown #countdowncont ul#countscript li p {
-        font-size: 16px;
-        line-height: 16px;
-    }
-
-    #footercont .social-links ul li {
-        margin: 0 5px;
-    }
-
-    #footercont .social-links ul li a {
-        font-size: 28px;
+    .social-links ul li a {
+        font-size: 3rem;
     }
 }
+
+
+/* COOKIE BANNER */

@@ -127,23 +127,6 @@ $.extend($.easing, {
     }
 });
 
-/** Scroll **/
-$(document).ready(function () {
-    "use strict";
-    $('.backtotop a').bind('click', function (event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({scrollTop: $($anchor.attr('href')).offset().top}, 500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-});
-
-/** Countdown Timer **/
-
-$(document).ready(function () {
-    "use strict";
-    $("#countdown").countdown();
-});
-
 function getOS() {
     let userAgent = window.navigator.userAgent,
         platform = window.navigator.platform,

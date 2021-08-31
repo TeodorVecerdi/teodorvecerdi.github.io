@@ -19,15 +19,15 @@
 
     <!-- Title tags-->
     <title>Teodor Vecerdi - Portfolio</title>
-    <meta name="twitter:title" content="TeodorVecerdi - Portfolio">
-    <meta property="og:title" content="TeodorVecerdi - Portfolio">
+    <meta name="twitter:title" content="Teodor Vecerdi - Portfolio">
+    <meta property="og:title" content="Teodor Vecerdi - Portfolio">
 
     <!-- Description tags-->
-    <meta name="description" content="I'm a second year Game Engineering student at Saxion University of Applied Sciences! Check out the things I'm working on!">
-    <meta name="twitter:description" content="I'm a second year Game Engineering student at Saxion University of Applied Sciences! Check out the things I'm working on! 🔨">
-    <meta property="twitter:image:alt" content="I'm a second year Game Engineering student at Saxion University of Applied Sciences! Check out the things I'm working on! 🔨">
-    <meta property="og:description" content="I'm a second year Game Engineering student at Saxion University of Applied Sciences! Check out the things I'm working on! 🔨">
-    <meta property="og:image:alt" content="I'm a second year Game Engineering student at Saxion University of Applied Sciences! Check out the things I'm working on! 🔨">
+    <meta name="description" content="I'm a third year Game Engineering student at Saxion University of Applied Sciences! Check out the things I'm working on!">
+    <meta name="twitter:description" content="I'm a third year Game Engineering student at Saxion University of Applied Sciences! Check out the things I'm working on! 🔨">
+    <meta property="twitter:image:alt" content="I'm a third year Game Engineering student at Saxion University of Applied Sciences! Check out the things I'm working on! 🔨">
+    <meta property="og:description" content="I'm a third year Game Engineering student at Saxion University of Applied Sciences! Check out the things I'm working on! 🔨">
+    <meta property="og:image:alt" content="I'm a third year Game Engineering student at Saxion University of Applied Sciences! Check out the things I'm working on! 🔨">
 
     <meta name="keywords" content="game portfolio,game engineer,software engineer,engineer,portfolio,programmer,showcase">
     <meta name="robots" content="index, follow">
@@ -56,96 +56,82 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
-    <link href="css/clean/reset.min.css" rel="stylesheet">
-    <link href="css/clean/style.min.css" rel="stylesheet">
+    <!-- Cookie Consent by https://www.FreePrivacyPolicy.com -->
+    <script type="text/javascript" src="https://www.freeprivacypolicy.com/public/cookie-consent/4.0.0/cookie-consent.js" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" charset="UTF-8">
+        document.addEventListener('DOMContentLoaded', function () {
+            cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"dark","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"notice_banner_preferences_button_hide":true,"preferences_center_close_button_hide":false,"website_name":"vecerdi.dev"});
+        });
+    </script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script defer async src="https://www.googletagmanager.com/gtag/js?id=UA-184308064-2" referrerpolicy="no-referrer" crossorigin="anonymous"></script>
-    <script defer>
+    <!-- Google Analytics -->
+    <script type="text/plain" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=UA-184308064-2" referrerpolicy="no-referrer" crossorigin="anonymous"></script>
+    <script type="text/plain" cookie-consent="tracking" defer>
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
             dataLayer.push(arguments);
         }
 
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'analytics_storage': 'denied'
+        });
+
         gtag('js', new Date());
 
         gtag('config', 'UA-184308064-2');
     </script>
+    <!-- end of Google Analytics-->
+    <!-- End Cookie Consent -->
+
+    <link href="css/clean/reset.min.css" rel="stylesheet">
+    <link href="css/clean/theme.min.css" rel="stylesheet">
+    <link href="css/clean/style.min.css" rel="stylesheet">
+    <link href="css/cookie-banner.css" rel="stylesheet">
+<!--    <link href="css/style.css" rel="stylesheet">-->
 
     <script defer src="https://kit.fontawesome.com/90ee79817d.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"
             referrerpolicy="no-referrer"></script>
-    <script src="js/countdown.min.js"></script>
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
 </head>
 
-<body class="theme dark">
-<!--Temporary until button redesign-->
-<!--
-<svg style="fill: var(&#45;&#45;dark); transform: scale(1.3); transform-origin: top left" xmlns="http://www.w3.org/2000/svg" width="32px" height="32px">
-    <g class="theme-toggle-sun">
-        <path d="M4.7,4.7v22.6h22.6V4.7H4.7z M16,25c-5,0-9-4-9-9s4-9,9-9s9,4,9,9S21,25,16,25z"/>
-        <path d="M16,0L0,16l16,16l16-16L16,0z M16,25c-5,0-9-4-9-9s4-9,9-9s9,4,9,9S21,25,16,25z"/>
-    </g>
-    <path class="theme-toggle-circle" d="M23,16c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S23,12.1,23,16z"/>
-</svg>-->
+<body class="theme dark full-height">
 
 <button class="aria-tooltip left" id="theme-toggle" aria-label="Change to dark theme">
 </button>
 
-<main>
-    <section class="full-width clearfix">
-        <div id="topcontainer" class="text-dark bodycontainer clearfix" style="max-width: none" data-uk-scrollspy="{cls:'uk-animation-fade', delay: 300, repeat: true}">
-            <h1 class="unselectable underlined raised font-weight-100 transform raise-5 raise-m-5" style="min-width: auto; width: auto">vecerdi.dev</h1>
-            <h1 class="greeting">Hello there! 👋🏻</h1>
-            <p>I'm <strong>Teodor Vecerdi</strong>, a third year Game Engineering student at Saxion University of Applied Sciences! 🔨</p>
-            <p>The website is not ready yet, but in the meantime you can check out my stuff at <a href="https://linktr.ee/TeodorVecerdi" target="_blank" rel="noopener">linktr.ee/TeodorVecerdi</a>,
-                or at the links
-                below:</p>
-            <div class="social-links clearfix pt-1 pb-2">
+<main class="full-height">
+    <section class="flex column justify-content-center full-width full-height transform">
+        <h1 id="vecerdi-dev-title" class="unselectable underlined raised font-weight-100 text-dark text-center pb-3 pb-tablet-0 pb-phone-0" style="width: auto; min-width: auto"></h1>
+        <div class="text-dark flex column align-items-center">
+            <h1 class="greeting mb-1 pb-0">Hello there! 👋🏻</h1>
+            <div class="text-center text-tablet-justify px-0 px-tablet-5 px-phone-5">
+                <p>I'm <strong>Teodor Vecerdi</strong>, a third year Game Engineering student at Saxion University of Applied Sciences! 🔨</p>
+                <p class="mt-0 mt-tablet-1">The website is not ready yet, but in the meantime you can check out my stuff at the links below:</p>
+            </div>
+            <div class="social-links clearfix mt-3">
                 <ul>
                     <li><a class="aria-tooltip" aria-label="GitHub" href="https://github.com/TeodorVecerdi" target="_blank" rel="noopener"><span class="fab fa-github"></span></a>
                     </li>
+                    <li class="mx-1"><a class="aria-tooltip" aria-label="CV" href="https://go.vecerdi.dev/cv" target="_blank" rel="noopener">
+                        <span class="fa-layers fa-w-14">
+                            <i class="fas fa-file" data-fa-transform="shrink-1.5"></i>
+                            <span class="fw-600 fa-layers-text text-light unselectable" data-fa-transform="shrink-10 down-3 left-0.25">CV</span>
+                        </span>
+                    </a></li>
                     <li><a class="aria-tooltip" aria-label="Twitter" href="https://twitter.com/TeodorVecerdi" target="_blank" rel="noopener"><span
                             class="fab fa-twitter"></span></a></li>
                     <li><a class="aria-tooltip" aria-label="LinkedIn" href="https://linkedin.com/in/TeodorVecerdi" target="_blank" rel="noopener"><span
                             class="fab fa-linkedin"></span></a></li>
                     <li><a class="aria-tooltip" aria-label="Instagram" href="https://instagram.com/TeodorVecerdi" target="_blank" rel="noopener"><span
                             class="fab fa-instagram"></span></a></li>
-                    <li><a class="aria-tooltip" aria-label="Email" href="mailto:teodor.vecerdi@gmail.com" target="_blank" rel="noopener"><span class="fas fa-envelope"></span></a>
-                    </li>
+                    <li><a class="aria-tooltip" aria-label="Email" href="mailto:teodor.vecerdi@gmail.com" target="_blank" rel="noopener"><span class="fas fa-envelope"></span></a></li>
                 </ul>
             </div>
-            <p>Come back in</p>
-        </div>
-    </section>
-    <div class="arrow-separator arrow-white"></div>
-    <section class="full-padding bg-primary-dark clearfix">
-        <div id="countdown" class="bodycontainer clearfix" data-uk-scrollspy="{cls:'uk-animation-fade', delay: 300, repeat: true}">
-            <div id="countdowncont" class="clearfix unselectable">
-                <ul id="countscript">
-                    <li>
-                        <span class="days">00</span>
-                        <p>Days</p>
-                    </li>
-                    <li>
-                        <span class="hours">00</span>
-                        <p>Hours</p>
-                    </li>
-                    <li class="clearbox">
-                        <span class="minutes">00</span>
-                        <p>Minutes</p>
-                    </li>
-                    <li>
-                        <span class="seconds">00</span>
-                        <p>Seconds</p>
-                    </li>
-                </ul>
-            </div>
-
         </div>
     </section>
 </main>
