@@ -57,25 +57,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
     <!-- Cookie Consent by https://www.FreePrivacyPolicy.com -->
-    <script type="text/javascript" src="https://www.freeprivacypolicy.com/public/cookie-consent/4.0.0/cookie-consent.js" referrerpolicy="no-referrer"></script>
+    <!--<script type="text/javascript" src="https://www.freeprivacypolicy.com/public/cookie-consent/4.0.0/cookie-consent.js" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" charset="UTF-8">
         document.addEventListener('DOMContentLoaded', function () {
             cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"dark","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"notice_banner_preferences_button_hide":true,"preferences_center_close_button_hide":false,"website_name":"vecerdi.dev"});
         });
-    </script>
+    </script>-->
 
     <!-- Google Analytics -->
-    <script type="text/plain" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=UA-184308064-2" referrerpolicy="no-referrer" crossorigin="anonymous"></script>
-    <script type="text/plain" cookie-consent="tracking" defer>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WVF3XM5');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-184308064-2"></script>
+    <script defer>
         window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
-        gtag('config', 'UA-184308064-2');
+        gtag('config', 'G-X09K9ZEP66');
+        // gtag('config', 'UA-184308064-2');
     </script>
     <!-- end of Google Analytics-->
     <!-- End Cookie Consent -->
@@ -95,6 +98,10 @@
 </head>
 
 <body class="theme dark full-height">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVF3XM5"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <button class="aria-tooltip left" id="theme-toggle" aria-label="Change to dark theme">
 </button>
