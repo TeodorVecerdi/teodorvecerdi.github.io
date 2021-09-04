@@ -18407,6 +18407,9 @@ h3 {
 #theme-toggle:hover {
   cursor: pointer;
 }
+#theme-toggle > * {
+  pointer-events: none;
+}
 
 .greeting {
   font-size: 2.25em;
