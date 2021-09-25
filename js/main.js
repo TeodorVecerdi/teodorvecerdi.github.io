@@ -1,16 +1,16 @@
 const dark_css = `<span class="fa-stack fa-2x">
         <i class="fas fa-circle fa-stack-2x text-primary"></i>
-        <i class="fas fa-moon fa-stack-1x text-light" data-fa-transform="grow-2.5 left-1"></i>
+        <i class="fas fa-moon fa-stack-1x text-dark" data-fa-transform="grow-2.5 left-1"></i>
     </span>`;
 
 const light_css = `<span class="fa-stack fa-2x">
         <i class="fas fa-circle fa-stack-2x text-primary"></i>
-        <i class="fas fa-lightbulb fa-stack-1x text-light" data-fa-transform="grow-3"></i>
+        <i class="fas fa-lightbulb fa-stack-1x text-dark" data-fa-transform="grow-3"></i>
     </span>`;
 
 const system_css = `<span class="fa-stack fa-2x">
         <i class="fas fa-circle fa-stack-2x text-primary"></i>
-        <i class="{0} fa-stack-1x text-light" data-fa-transform="grow-3 left-1"></i>
+        <i class="{0} fa-stack-1x text-dark" data-fa-transform="grow-3 left-1"></i>
     </span>`
 
 function applyTheme() {
@@ -62,8 +62,8 @@ function toggleTheme() {
 }
 
 $(() => {
-    applyTheme();
+    /*applyTheme();
     $('#theme-toggle').on('click', () => {
         toggleTheme();
-    });
+    });*/
 });

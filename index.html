@@ -1,16 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]>
-<html class="ie ie6" lang="en">
-<![endif]-->
-<!--[if IE 7 ]>
-<html class="ie ie7" lang="en">
-<![endif]-->
-<!--[if IE 8 ]>
-<html class="ie ie8" lang="en">
-<![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="en">
-<!--<![endif]-->
 <head>
     <meta charset="UTF-8">
     <link rel="dns-prefetch" href="https://ka-f.fontawesome.com">
@@ -78,9 +67,11 @@
     </script>
 
     <link href="css/clean/reset.min.css" rel="stylesheet">
+    <link href="css/clean/layout.min.css" rel="stylesheet">
     <link href="css/clean/theme.min.css" rel="stylesheet">
     <link href="css/clean/style.min.css" rel="stylesheet">
     <link href="css/cookie-banner.css" rel="stylesheet">
+<!--    <link href="css/layout.css" rel="stylesheet">-->
 <!--    <link href="css/style.css" rel="stylesheet">-->
 
     <script defer src="https://kit.fontawesome.com/90ee79817d.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -91,16 +82,12 @@
     <script src="js/main.min.js"></script>
 </head>
 
-<body class="theme dark full-height">
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVF3XM5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<body class="theme h-100">
 
-<button class="aria-tooltip left" id="theme-toggle" onclick="dataLayer.push({'event': 'change_theme', 'current_theme': localStorage.getItem('theme')})" aria-label="Change to dark theme">
-</button>
-
-<main class="full-height">
-    <section class="flex column justify-content-center full-width full-height transform">
-        <h1 id="vecerdi-dev-title" class="unselectable underlined raised font-weight-100 text-dark text-center pb-3 pb-tablet-0 pb-phone-0" style="width: auto; min-width: auto"></h1>
-        <div class="text-dark flex column align-items-center">
+<main class="h-100">
+    <section class="flex column justify-content-center w-100 h-100 transform">
+        <h1 id="vecerdi-dev-title" class="unselectable underlined raised font-weight-100 text-light text-center pb-3 pb-tablet-0 pb-phone-0" style="width: auto; min-width: auto"></h1>
+        <div class="text-light flex column align-items-center">
             <h1 class="greeting mb-1 pb-0">Hello there! 👋🏻</h1>
             <div class="text-center text-tablet-justify px-0 px-tablet-5 px-phone-5">
                 <p>I'm <strong>Teodor Vecerdi</strong>, a third year Game Engineering student at Saxion University of Applied Sciences! 🔨</p>
@@ -113,7 +100,7 @@
                     <li class="mx-1"><a class="aria-tooltip" aria-label="CV" href="https://go.vecerdi.dev/cv" target="_blank" rel="noopener">
                         <span class="fa-layers fa-w-14">
                             <i class="fas fa-file" data-fa-transform="shrink-1.5"></i>
-                            <span class="fw-600 fa-layers-text text-light unselectable" data-fa-transform="shrink-10 down-3 left-0.25">CV</span>
+                            <span class="fw-600 fa-layers-text text-dark unselectable" data-fa-transform="shrink-10 down-3 left-0.25">CV</span>
                         </span>
                     </a></li>
                     <li><a class="aria-tooltip" aria-label="Twitter" href="https://twitter.com/TeodorVecerdi" target="_blank" rel="noopener"><span

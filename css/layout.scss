@@ -1,0 +1,218 @@
+@import "mixins.scss";
+@mixin flex($prefix) {
+    .flex {
+        display: flex;
+
+        &.#{$prefix}column {
+            flex-direction: column;
+        }
+
+        &.#{$prefix}column-reverse {
+            flex-direction: column-reverse;
+        }
+
+        &.#{$prefix}row {
+            flex-direction: row;
+        }
+
+        &.#{$prefix}row-reverse {
+            flex-direction: row-reverse;
+        }
+
+        &.#{$prefix}wrap {
+            flex-wrap: wrap;
+        }
+
+        &.#{$prefix}nowrap {
+            flex-wrap: nowrap;
+        }
+    }
+
+    .#{$prefix}justify-content-center {
+        justify-content: center;
+    }
+
+    .#{$prefix}justify-content-start {
+        justify-content: start;
+    }
+
+    .#{$prefix}justify-content-end {
+        justify-content: end;
+    }
+
+    .#{$prefix}justify-content-space-around {
+        justify-content: space-around;
+    }
+
+    .#{$prefix}justify-content-space-between {
+        justify-content: space-between;
+    }
+
+    .#{$prefix}justify-content-space-evenly {
+        justify-content: space-evenly;
+    }
+
+    .#{$prefix}justify-self-center {
+        justify-self: center;
+    }
+
+    .#{$prefix}justify-self-start {
+        justify-self: start;
+    }
+
+    .#{$prefix}justify-self-end {
+        justify-self: end;
+    }
+
+    .#{$prefix}align-items-center {
+        align-items: center;
+    }
+
+    .#{$prefix}align-items-start {
+        align-items: start;
+    }
+
+    .#{$prefix}align-items-end {
+        align-items: end;
+    }
+
+    .#{$prefix}align-items-stretch {
+        align-items: stretch;
+    }
+
+    .#{$prefix}align-items-baseline {
+        align-items: baseline;
+    }
+
+    .#{$prefix}align-content-center {
+        align-content: center;
+    }
+
+    .#{$prefix}align-content-start {
+        align-content: start;
+    }
+
+    .#{$prefix}align-content-end {
+        align-content: end;
+    }
+
+    .#{$prefix}align-content-stretch {
+        align-content: stretch;
+    }
+
+    .#{$prefix}align-content-space-around {
+        align-content: space-around;
+    }
+
+    .#{$prefix}align-content-space-between {
+        align-content: space-between;
+    }
+
+    .#{$prefix}align-self-center {
+        align-self: center;
+    }
+
+    .#{$prefix}align-self-start {
+        align-self: start;
+    }
+
+    .#{$prefix}align-self-end {
+        align-self: end;
+    }
+}
+
+@include flex("");
+@include media("<=tablet") {
+    @include flex("tablet-");
+}
+@include media("<=phone") {
+    @include flex("phone-");
+}
+
+$__map_0: ("m": "margin", "p": "padding");
+$__steps_0: 10;
+$__multiplier_0: 0.25;
+@each $key in map-keys($__map_0) {
+    $val: map-get($__map_0, $key);
+    @for $i from 0 through $__steps_0 {
+        @include lrtbxy("#{$key}", "-#{$i}", "#{$val}", #{$i * $__multiplier_0}em);
+    }
+
+    @include media("<=tablet") {
+        @for $i from 0 through $__steps_0 {
+            @include lrtbxy("#{$key}", "-tablet-#{$i}", "#{$val}", #{$i * $__multiplier_0}em);
+        }
+    }
+    @include media("<=phone") {
+        @for $i from 0 through $__steps_0 {
+            @include lrtbxy("#{$key}", "-phone-#{$i}", "#{$val}", #{$i * $__multiplier_0}em);
+        }
+    }
+}
+
+$__steps_1: 10;
+$__list_0: ['25', '50', '75', '100'];
+
+@for $i from 1 through $__steps_1 {
+    @include _expr("fw-#{$i * 100}", "font-weight", "#{$i * 100} !important");
+}
+
+@each $alignment in ("start", "center", "end", "justify") {
+    @include _expr("text-#{$alignment}", "text-align", "#{$alignment} !important");
+}
+
+@each $size in $__list_0 {
+    @include _expr('w-#{$size}', 'width', '#{$size}%');
+    @include _expr('h-#{$size}', 'height', '#{$size}%');
+}
+
+@include media("<=tablet") {
+    @for $i from 1 through $__steps_1 {
+        @include _expr("fw-tablet-#{$i * 100}", "font-weight", "#{$i * 100} !important");
+    }
+    @each $alignment in ("start", "center", "end", "justify") {
+        @include _expr("text-tablet-#{$alignment}", "text-align", "#{$alignment} !important");
+    }
+    @each $size in $__list_0 {
+        @include _expr('w-tablet-#{$size}', 'width', '#{$size}%');
+        @include _expr('h-tablet-#{$size}', 'height', '#{$size}%');
+    }
+}
+
+@include media("<=phone") {
+    @for $i from 1 through $__steps_1 {
+        @include _expr("fw-phone-#{$i * 100}", "font-weight", "#{$i * 100} !important");
+    }
+    @each $alignment in ("start", "center", "end", "justify") {
+        @include _expr("text-phone-#{$alignment}", "text-align", "#{$alignment} !important");
+    }
+    @each $size in $__list_0 {
+        @include _expr('w-phone-#{$size}', 'width', '#{$size}%');
+        @include _expr('h-phone-#{$size}', 'height', '#{$size}%');
+    }
+}
+
+$__steps_2: 10;
+@for $i from 0 through $__steps_2 {
+    @include _expr('border-radius-#{$i}', 'border-radius', '#{$i * 0.125rem} !important');
+}
+
+@each $radius_percent in ("5", "10", "15", "25", "50") {
+    @include _expr('border-radius-#{$radius_percent}\\%', 'border-radius', '#{$radius_percent}% !important');
+}
+
+.text-decoration-none {
+    text-decoration: none;
+}
+
+.text-decoration-underline {
+    text-decoration-line: underline;
+}
+
+.text-decoration-strike {
+    text-decoration-line: line-through;
+}
+
+.text-decoration-overline {
+    text-decoration-line: overline;
+}

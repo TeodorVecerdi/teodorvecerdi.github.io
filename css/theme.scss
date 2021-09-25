@@ -1,145 +1,106 @@
-/* ==================================================
-   THEME
-================================================== */
+@use 'variables' as var;
 
-.theme {
-    // timings
-    --transition-time: 250ms;
-    --tooltip-transition-time: 100ms;
-    --tooltip-delay: 75ms;
+@mixin light_vars {
+    --primary-light: #{lighten(var.$primary, var.$primary_change_amount)};
+    --primary-lighter: #{lighten(var.$primary, 2 * var.$primary_change_amount)};
+    --primary: #{var.$primary};
+    --primary-dark: #{darken(var.$primary, var.$primary_change_amount)};
+    --primary-darker: #{darken(var.$primary, 2 * var.$primary_change_amount)};
 
-    --primary: hsl(206, 100%, 42%);
-    --primary-light: hsl(206, 100%, 53%);
-    --primary-dark: hsl(206, 100%, 31%);
-
-    // auto dark
-    --primary-lighter: hsl(206, 100%, 64%);
-    --primary-darker: hsl(206, 100%, 20%);
-
+    --lighter: hsl(0, 0%, 9%);
     --light: hsl(0, 0%, 13%);
     --lightish: hsl(0, 0%, 23%);
     --gray: hsl(0, 0%, 60%);
     --dark-gray: hsl(0, 0%, 93%);
     --dark: hsl(0, 0%, 100%);
+    --darkish: hsl(0, 0%, 93%);
+    --darker: hsl(0, 0%, 93%);
+    --black: hsl(0, 0%, 100%);
 
-    --no-theme-light: hsl(0, 0%, 100%);
-    --no-theme-lightish: hsl(0, 0%, 93%);
-    --no-theme-gray: hsl(0, 0%, 93%);
-    --no-theme-dark-gray: hsl(0, 0%, 60%);
-    --no-theme-dark: hsl(0, 0%, 13%);
-    --no-theme-darkish: hsl(0, 0%, 20%);
-    --countdown-text: var(--dark-gray);
+    --unthemed-lighter: hsl(0, 0%, 93%);
+    --unthemed-light: hsl(0, 0%, 100%);
+    --unthemed-lightish: hsl(0, 0%, 93%);
+    --unthemed-gray: hsl(0, 0%, 93%);
+    --unthemed-dark-gray: hsl(0, 0%, 60%);
+    --unthemed-dark: hsl(0, 0%, 13%);
+    --unthemed-darker: hsl(0, 0%, 9%);
+}
 
+@mixin dark_vars {
+    --primary-light: #{lighten(var.$primary, var.$primary_change_amount)};
+    --primary-lighter: #{lighten(var.$primary, 2 * var.$primary_change_amount)};
+    --primary: #{var.$primary};
+    --primary-dark: #{darken(var.$primary, var.$primary_change_amount)};
+    --primary-darker: #{darken(var.$primary, 2 * var.$primary_change_amount)};
+
+    --lighter: hsl(0, 0%, 93%);
+    --light: hsl(0, 0%, 100%);
+    --lightish: hsl(0, 0%, 93%);
+    --gray: hsl(0, 0%, 93%);
+    --dark-gray: hsl(0, 0%, 60%);
+    --darkish: hsl(0, 0%, 23%);
+    --dark: hsl(0, 0%, 13%);
+    --darker: hsl(0, 0%, 9%);
+    --black: hsl(0, 0%, 0%);
+
+    --unthemed-lighter: hsl(0, 0%, 93%);
+    --unthemed-light: hsl(0, 0%, 100%);
+    --unthemed-lightish: hsl(0, 0%, 93%);
+    --unthemed-gray: hsl(0, 0%, 93%);
+    --unthemed-dark-gray: hsl(0, 0%, 60%);
+    --unthemed-dark: hsl(0, 0%, 13%);
+    --unthemed-darker: hsl(0, 0%, 9%);
+}
+
+/* Theme */
+.theme {
+    // timings
+    --transition-time: 250ms;
+    --tooltip-transition-time: 100ms;
+    --tooltip-delay: 75ms;
     --default-font-weight: 300;
+
+    @include dark_vars;
 
     transition: color var(--transition-time) linear, background-color var(--transition-time) linear, border-bottom-color var(--transition-time) linear, border-left-color var(--transition-time) linear, border-top-color var(--transition-time) linear, border-right-color var(--transition-time) linear;
 
     // forced dark
     &.dark {
-        --primary-lighter: hsl(206, 100%, 64%);
-        --primary-darker: hsl(206, 100%, 20%);
-        --light: hsl(0, 0%, 13%);
-        --lightish: hsl(0, 0%, 23%);
-        --gray: hsl(0, 0%, 60%);
-        --dark-gray: hsl(0, 0%, 93%);
-        --dark: hsl(0, 0%, 100%);
-        --countdown-text: var(--dark-gray);
-
+        @include dark_vars;
         --default-font-weight: 300;
     }
 
     // forced light
     &.light {
-        --primary-lighter: hsl(206, 100%, 64%);
-        --primary-darker: hsl(206, 100%, 20%);
-
-        --light: hsl(0, 0%, 100%);
-        --lightish: hsl(0, 0%, 93%);
-        --gray: hsl(0, 0%, 93%);
-        --dark-gray: hsl(0, 0%, 60%);
-        --dark: hsl(0, 0%, 13%);
-
-        --countdown-text: var(--light);
-
+        @include light_vars;
         --default-font-weight: 400;
     }
 }
 
 @media (prefers-color-scheme: light) {
     .theme {
-        --primary-lighter: hsl(206, 100%, 64%);
-        --primary-darker: hsl(206, 100%, 20%);
-        --light: hsl(0, 0%, 100%);
-        --lightish: hsl(0, 0%, 93%);
-        --gray: hsl(0, 0%, 93%);
-        --dark-gray: hsl(0, 0%, 60%);
-        --dark: hsl(0, 0%, 13%);
-
-        --countdown-text: var(--light);
-
+        @include light_vars;
         --default-font-weight: 400;
     }
 }
 
-//region Theme Classes
-.text-light {
-    color: var(--light);
-}
+$colors: (
+        primary, primary-light, primary-dark, primary-lighter, primary-darker, lighter, light, lightish, gray, dark-gray, dark, darker,
+        unthemed-lighter, unthemed-light, unthemed-lightish, unthemed-gray, unthemed-dark-gray, unthemed-dark, unthemed-darker
+);
 
-.text-gray {
-    color: var(--gray);
-}
+@each $color in $colors {
+    .border-#{$color} {
+        border-color: var(--#{$color});
+    }
 
-.text-dark-gray {
-    color: var(--dark-gray);
-}
+    .text-#{$color} {
+        color: var(--#{$color});
+    }
 
-.text-dark {
-    color: var(--dark);
-}
-
-.text-primary {
-    color: var(--primary);
-}
-
-.text-primary-light {
-    color: var(--primary-light);
-}
-
-.text-primary-dark {
-    color: var(--primary-dark);
-}
-
-.text-primary-lighter {
-    color: var(--primary-lighter);
-}
-
-.text-primary-darker {
-    color: var(--primary-darker);
-}
-
-.bg-primary {
-    background-color: var(--primary);
-}
-
-.bg-primary-light {
-    background-color: var(--primary-light);
-}
-
-.bg-primary-dark {
-    background-color: var(--primary-dark);
-}
-
-.bg-primary-lighter {
-    background-color: var(--primary-lighter);
-}
-
-.bg-primary-darker {
-    background-color: var(--primary-darker);
-}
-
-.bg-gray {
-    background-color: var(--gray);
+    .bg-#{$color} {
+        background-color: var(--#{$color});
+    }
 }
 
 //endregion
