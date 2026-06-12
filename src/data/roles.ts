@@ -18,6 +18,6 @@ export const roles: Role[] = [
     title: 'Unity and .NET Developer',
     period: 'Oct 2021 — Dec 2025',
     blurb:
-      'Built VR and mobile language-learning experiences in Unity and C#, backed by .NET cloud services. On a small team I owned a lot of the surface area — system architecture, backend and LiveOps infrastructure, gameplay, and UI — shipping and maintaining features end-to-end across several years of releases.',
+      'Built VR language-learning experiences in Unity and C#, backed by .NET cloud services. On a small team I owned a lot of the surface area — system architecture, backend and LiveOps infrastructure, gameplay, and UI — shipping and maintaining features end-to-end across several years of releases.',
   },
 ]
