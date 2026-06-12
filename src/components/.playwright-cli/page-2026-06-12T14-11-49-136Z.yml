@@ -1,0 +1,48 @@
+- generic [ref=e3]:
+  - button "Toggle theme" [ref=e4]: ◐ dark
+  - main [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - paragraph [ref=e10]: Teodor Vecerdi — Software Engineer
+          - heading "Teodor Vecerdi" [level=1] [ref=e11]:
+            - text: Teodor
+            - text: Vecerdi
+          - paragraph [ref=e12]: "I'm a software engineer who likes building things carefully and end‑to‑end — from backend services to the interfaces on top. I've worn most hats: architecture, frontend, cloud, and a fair amount of design along the way."
+        - navigation "Links" [ref=e13]:
+          - link "GitHub" [ref=e14] [cursor=pointer]:
+            - /url: https://github.com/TeodorVecerdi
+            - img [ref=e15]
+            - generic [ref=e17]: GitHub
+          - link "Bluesky" [ref=e18] [cursor=pointer]:
+            - /url: https://bsky.app/profile/vecerdi.dev
+            - img [ref=e19]
+            - generic [ref=e21]: Bluesky
+          - link "LinkedIn" [ref=e22] [cursor=pointer]:
+            - /url: https://linkedin.com/in/TeodorVecerdi
+            - img [ref=e23]
+            - generic [ref=e25]: LinkedIn
+          - link "Twitter" [ref=e26] [cursor=pointer]:
+            - /url: https://twitter.com/TeodorVecerdi
+            - img [ref=e27]
+            - generic [ref=e29]: Twitter
+          - link "Email" [ref=e30] [cursor=pointer]:
+            - /url: mailto:teodor@vecerdi.ai
+            - img [ref=e31]
+            - generic [ref=e33]: Email
+      - generic [ref=e36]:
+        - paragraph [ref=e37]: Work
+        - list [ref=e38]:
+          - listitem [ref=e39]:
+            - generic [ref=e40]:
+              - heading "Software Engineer" [level=2] [ref=e41]
+              - generic [ref=e42]: 2026 — present
+            - paragraph [ref=e43]: Pearson Labs
+            - paragraph [ref=e44]: "Full-stack engineering across a .NET backend and a React frontend: services, APIs, and the interfaces that sit on top of them."
+          - listitem [ref=e45]:
+            - generic [ref=e46]:
+              - heading "VR / Unity / .NET Developer" [level=2] [ref=e47]
+              - generic [ref=e48]: Oct 2021 — Dec 2025
+            - paragraph [ref=e49]: Mondly by Pearson
+            - paragraph [ref=e50]: A small team, so I wore every hat — UI & game design, architecture, cloud services, and LiveOps — building VR language-learning experiences in Unity and .NET.
+    - generic [ref=e51]: © 2026 Teodor Vecerdi

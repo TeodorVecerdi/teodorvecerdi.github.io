@@ -1,73 +1,94 @@
 @import 'tailwindcss';
 
-@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/newsreader';
 @import '@fontsource-variable/hanken-grotesk';
 
 @theme {
-  --color-night: #0f1026;
-  --color-night-deep: #07071a;
-  --color-lilac: #b9a7e6;
-  --color-star: #ffe9b8;
-  --color-mist: #a7a4c4;
-  --color-text: #f4f1ff;
+  --font-serif: 'Newsreader Variable', Georgia, serif;
+  --font-sans: 'Hanken Grotesk Variable', system-ui, sans-serif;
+}
 
-  --font-display: 'Fraunces Variable', Georgia, serif;
-  --font-body: 'Hanken Grotesk Variable', system-ui, sans-serif;
+/* ---- Theme palettes ---- */
+:root,
+[data-theme='paper'] {
+  --bg: #f6f3ec;
+  --bg-soft: #efebe1;
+  --ink: #1a1a1a;
+  --muted: #6b655a;
+  --faint: #d8d2c4;
+  --accent: #9a4a2f;
+  --paper-grain: 0.025;
+}
+
+[data-theme='dark'] {
+  --bg: #16161a;
+  --bg-soft: #1c1c21;
+  --ink: #e7e6e3;
+  --muted: #9b9aa0;
+  --faint: #34343c;
+  --accent: #b08a5a;
+  --paper-grain: 0;
 }
 
 @layer base {
   html {
-    color-scheme: dark;
-  }
-
-  body {
-    margin: 0;
-    background-color: var(--color-night-deep);
-    color: var(--color-text);
-    font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
   ::selection {
-    background: color-mix(in srgb, var(--color-lilac) 40%, transparent);
-    color: var(--color-text);
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  a {
+    color: inherit;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-star);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 3px;
+    border-radius: 2px;
   }
 }
 
-/* ---- Entrance reveal (minimal motion) ---- */
+/* Section eyebrow labels */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Link underline reacts to the accent on hover/focus */
+.group:hover span,
+.group:focus-visible span {
+  color: var(--accent);
+  border-color: var(--accent) !important;
+}
+
+/* Quiet entrance — a single staggered settle */
 @media (prefers-reduced-motion: no-preference) {
-  .reveal {
+  .settle {
     opacity: 0;
-    transform: translateY(14px);
-    animation: reveal-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: var(--reveal-delay, 0ms);
-  }
-
-  /* A single, very slow drift on the moon — barely perceptible. */
-  .moon-drift {
-    animation: moon-drift 36s ease-in-out infinite alternate;
+    transform: translateY(8px);
+    animation: settle-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--settle-delay, 0ms);
   }
 }
 
-@keyframes reveal-in {
+@keyframes settle-in {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes moon-drift {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(0, -10px, 0);
   }
 }
