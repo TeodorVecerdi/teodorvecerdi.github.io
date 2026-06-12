@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/hanken-grotesk';
+
+@theme {
+  --color-night: #0f1026;
+  --color-night-deep: #07071a;
+  --color-lilac: #b9a7e6;
+  --color-star: #ffe9b8;
+  --color-mist: #a7a4c4;
+  --color-text: #f4f1ff;
+
+  --font-display: 'Fraunces Variable', Georgia, serif;
+  --font-body: 'Hanken Grotesk Variable', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-night-deep);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-lilac) 40%, transparent);
+    color: var(--color-text);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-star);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+}
+
+/* ---- Entrance reveal (minimal motion) ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: reveal-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* A single, very slow drift on the moon — barely perceptible. */
+  .moon-drift {
+    animation: moon-drift 36s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes reveal-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes moon-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -10px, 0);
+  }
+}
