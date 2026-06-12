@@ -15,9 +15,9 @@ export const roles: Role[] = [
   },
   {
     company: 'Mondly by Pearson',
-    title: 'VR / Unity / .NET Developer',
+    title: 'Unity and .NET Developer',
     period: 'Oct 2021 — Dec 2025',
     blurb:
-      'A small team, so I wore every hat — UI & game design, architecture, cloud services, and LiveOps — building VR language-learning experiences in Unity and .NET.',
+      'Built VR and mobile language-learning experiences in Unity and C#, backed by .NET cloud services. On a small team I owned a lot of the surface area — system architecture, backend and LiveOps infrastructure, gameplay, and UI — shipping and maintaining features end-to-end across several years of releases.',
   },
 ]
