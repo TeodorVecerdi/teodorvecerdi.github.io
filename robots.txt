@@ -1,6 +1,0 @@
-User-Agent: *
-Disallow: /.gitignore
-Disallow: /CNAME
-Disallow: /LICENSE.md
-Disallow: /README.md
-Disallow: /data
