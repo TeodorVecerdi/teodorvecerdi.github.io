@@ -9,7 +9,7 @@ export function Intro() {
           className="settle eyebrow"
           style={{ '--settle-delay': '60ms' } as React.CSSProperties}
         >
-          Software Engineer
+          About me
         </p>
 
         <h1
