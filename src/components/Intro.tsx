@@ -30,10 +30,11 @@ export function Intro() {
             } as React.CSSProperties
           }
         >
-          I'm a software engineer who cares about building things well —
-          solid architecture, systems that hold up, and the small details that
-          make software feel considered. I work comfortably across the stack,
-          but engineering is where I'm most at home.
+          I'm a software engineer. For the last few years I've built VR
+          language-learning software in Unity and C#, and more recently
+          full-stack products — .NET backends, React frontends, Android. I
+          like owning systems end-to-end, from architecture down to the
+          details.
         </p>
       </div>
 
