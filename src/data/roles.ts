@@ -9,7 +9,7 @@ export const roles: Role[] = [
   {
     company: 'Pearson Labs',
     title: 'Software Engineer',
-    period: 'Jan 2026 — present',
+    period: 'Jan 2026 — Jul 2026',
     blurb:
       "Engineering inside Pearson's applied research lab, where we prototype and build to imagine the future of education. I've worked on immersive learning experiences that give teachers new ways to engage their students, and most recently on AI-powered language learning for wearables — full-stack across a .NET backend, a React web app, and a Kotlin Android client.",
   },
